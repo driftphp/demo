@@ -1,0 +1,163 @@
+{
+    "apisearch-io/react-symfony-server": {
+        "version": "dev-master"
+    },
+    "apisearch-io/symfony-async-http-kernel": {
+        "version": "dev-master"
+    },
+    "clue/redis-protocol": {
+        "version": "v0.3.1"
+    },
+    "clue/redis-react": {
+        "version": "v2.3.0"
+    },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
+    "psr/cache": {
+        "version": "1.0.1"
+    },
+    "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.x-dev"
+    },
+    "psr/log": {
+        "version": "1.1.0"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "react/cache": {
+        "version": "v0.5.0"
+    },
+    "react/dns": {
+        "version": "v0.4.17"
+    },
+    "react/event-loop": {
+        "version": "v1.1.0"
+    },
+    "react/http": {
+        "version": "dev-master"
+    },
+    "react/promise": {
+        "version": "2.x-dev"
+    },
+    "react/promise-stream": {
+        "version": "v1.1.1"
+    },
+    "react/promise-timer": {
+        "version": "v1.5.1"
+    },
+    "react/socket": {
+        "version": "v1.2.0"
+    },
+    "react/stream": {
+        "version": "v1.1.0"
+    },
+    "ringcentral/psr7": {
+        "version": "1.2.2"
+    },
+    "symfony/cache": {
+        "version": "v4.2.8"
+    },
+    "symfony/config": {
+        "version": "v4.2.8"
+    },
+    "symfony/console": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "482d233eb8de91ebd042992077bbd5838858890c"
+        },
+        "files": [
+            "bin/console",
+            "config/bootstrap.php"
+        ]
+    },
+    "symfony/contracts": {
+        "version": "v1.1.0"
+    },
+    "symfony/debug": {
+        "version": "v4.2.8"
+    },
+    "symfony/dependency-injection": {
+        "version": "v4.2.8"
+    },
+    "symfony/dotenv": {
+        "version": "v4.2.8"
+    },
+    "symfony/event-dispatcher": {
+        "version": "v4.2.8"
+    },
+    "symfony/filesystem": {
+        "version": "v4.2.8"
+    },
+    "symfony/finder": {
+        "version": "v4.2.8"
+    },
+    "symfony/flex": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "dc3fc2e0334a4137c47cfd5a3ececc601fa61a0b"
+        },
+        "files": [
+            ".env"
+        ]
+    },
+    "symfony/framework-bundle": {
+        "version": "4.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.2",
+            "ref": "f64037a414de7d861f68e9b5b5c0e4f7425e2002"
+        },
+        "files": [
+            "config/bootstrap.php",
+            "config/packages/cache.yaml",
+            "config/packages/framework.yaml",
+            "config/packages/test/framework.yaml",
+            "config/services.yaml",
+            "public/index.php",
+            "src/Controller/.gitignore",
+            "src/Kernel.php"
+        ]
+    },
+    "symfony/http-foundation": {
+        "version": "v4.2.8"
+    },
+    "symfony/http-kernel": {
+        "version": "v4.2.8"
+    },
+    "symfony/polyfill-mbstring": {
+        "version": "v1.11.0"
+    },
+    "symfony/routing": {
+        "version": "4.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.2",
+            "ref": "5374e24d508ba8fd6ba9eb15170255fdb778316a"
+        },
+        "files": [
+            "config/packages/dev/routing.yaml",
+            "config/packages/routing.yaml",
+            "config/packages/test/routing.yaml",
+            "config/routes.yaml"
+        ]
+    },
+    "symfony/var-exporter": {
+        "version": "v4.2.8"
+    },
+    "symfony/yaml": {
+        "version": "v4.2.8"
+    }
+}
