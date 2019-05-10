@@ -30,10 +30,3 @@ services:
         arguments:
             - "localhost"
             - 6379
-
-    reactphp.event_loop:
-        class: React\EventLoop\LoopInterface
-        synthetic: true
-
-    React\EventLoop\LoopInterface:
-        alias: reactphp.event_loop

@@ -14,7 +14,6 @@ namespace App\Controller;
  */
 use App\Redis\RedisWrapper;
 use React\Promise\PromiseInterface;
-use React\Promise\RejectedPromise;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -85,14 +85,10 @@ After installing the server, you should be able to find the `server` file under
 the bin directory. This file is ready to be used in the command line, in a
 DockerFile or in any other environment.
 
-Then, let's configure the application to start using this new server. As you can
-see, only few steps are needed before going to our domain.
-
-### Step 1 - Our kernel is Async
-
 Each Symfony application has a kernel. You will find it under `src/` folder. If
 you check the class, you will find that this kernel extends the Symfony
-component one. So we must change that.
+component one. So we must change that in order to give your application an
+asynchronous behavior.
 
 ```php
 namespace App;
@@ -110,28 +106,6 @@ class Kernel extends AsyncKernel
 }
 ```
 
-### Step 2 - Adding the event loop
-
-The installed server creates an event loop. And not only this. Because the whole
-project should work with the same event loop, the server, after booting the
-kernel, introduces in a synthetic way this event loop into the container
-instance.
-
-So, if we want to let Autowiring to the job, and allowing the server to set the
-Loop instance after booting the kernel, we must create and define it as 
-synthetic, and define an alias.
-
-Let's add this piece of code in `config/services.yaml` file
-
-```yaml
-reactphp.event_loop:
-    class: React\EventLoop\LoopInterface
-    synthetic: true
-
-React\EventLoop\LoopInterface:
-    alias: reactphp.event_loop
-```
-
 And that's it. Our application is properly configured.
 
 ## Creating a new Controller
@@ -147,19 +121,63 @@ you call a method, for example `->get($key)` you don't get a value, but a
 promise. 
 
 ```php
-return $this
-    ->redisWrapper
-    ->getClient()
-    ->get($key)
-    ->then(function($value) use ($key) {
-        return new JsonResponse(
-            [
-                'key' => $key,
-                'value' => $value,
-            ],
-            200
-        );
-    });
+use App\Redis\RedisWrapper;
+use React\Promise\PromiseInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * Class GetValueController
+ */
+class GetValueController
+{
+    /**
+     * @var RedisWrapper
+     *
+     * Redis Wrapper
+     */
+    private $redisWrapper;
+
+    /**
+     * PutValueController constructor.
+     *
+     * @param RedisWrapper $redisWrapper
+     */
+    public function __construct(RedisWrapper $redisWrapper)
+    {
+        $this->redisWrapper = $redisWrapper;
+    }
+
+    /**
+     * Invoke
+     *
+     * @param Request $request
+     *
+     * @return PromiseInterface
+     */
+    public function __invoke(Request $request)
+    {
+        $key = $request
+            ->attributes
+            ->get('key');
+
+        return $this
+            ->redisWrapper
+            ->getClient()
+            ->get($key)
+            ->then(function($value) use ($key) {
+                return new JsonResponse(
+                    [
+                        'key' => $key,
+                        'value' => is_string($value)
+                            ? $value
+                            : null,
+                    ],
+                    200
+                );
+            });
+    }
+}
 ```
 
 When the promise is resolved, the `then` method is called with the given result

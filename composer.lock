@@ -60,12 +60,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/apisearch-io/symfony-async-kernel.git",
-                "reference": "016637b5152306d97b358ceaf4c0a385278d7616"
+                "reference": "e43442cf07b6575e11faa79a03dfa2e49a9df2e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apisearch-io/symfony-async-kernel/zipball/016637b5152306d97b358ceaf4c0a385278d7616",
-                "reference": "016637b5152306d97b358ceaf4c0a385278d7616",
+                "url": "https://api.github.com/repos/apisearch-io/symfony-async-kernel/zipball/e43442cf07b6575e11faa79a03dfa2e49a9df2e2",
+                "reference": "e43442cf07b6575e11faa79a03dfa2e49a9df2e2",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                     "email": "yuhu@mmoreram.com"
                 }
             ],
-            "time": "2019-05-09T17:01:29+00:00"
+            "time": "2019-05-10T14:14:52+00:00"
         },
         {
             "name": "clue/redis-protocol",
