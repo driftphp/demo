@@ -5,6 +5,9 @@
     "apisearch-io/symfony-async-http-kernel": {
         "version": "dev-master"
     },
+    "apisearch-io/symfony-react-server": {
+        "version": "dev-master"
+    },
     "clue/redis-protocol": {
         "version": "v0.3.1"
     },

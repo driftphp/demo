@@ -58,22 +58,8 @@ both the server and the redis implementation to make asynchronous Redis calls.
     ...
     
     "apisearch-io/react-symfony-server": "dev-master@dev",
+    "apisearch-io/react-symfony-server": "dev-master@dev",
     "clue/redis-react": "*"
-},
-```
-
-These new lines will just download the code under a vendors subfolder, but we
-need the server to be properly installed. In order to do that, you can add a
-hook after composer has installed or updated the dependencies.
-
-```yaml
-"scripts": {
-    "post-install-cmd": [
-        "Apisearch\\ReactSymfonyServer\\ComposerHook::installReactServer"
-    ],
-    "post-update-cmd": [
-        "Apisearch\\ReactSymfonyServer\\ComposerHook::installReactServer"
-    ]
 },
 ```
 
@@ -107,6 +93,10 @@ class Kernel extends AsyncKernel
 ```
 
 And that's it. Our application is properly configured.
+
+> Redis connects at localhost in default port. You can change that configuration
+> by changing the hardcoded service definition inside `config/services.yaml`
+> file
 
 ## Creating a new Controller
 
@@ -193,17 +183,7 @@ it. The server should take care of the rest
 Simple. You only need a port, and that should be enough
 
 ```bash
-bin/server 0.0.0.0:8100
-```
-
-By default, the redis server connects to 127.0.0.1:6379, but you can change this
-behavior by using environment variables.
-
-```bash
-REDIS_HOST=localhost \
-REDIS_PORT=6379 \
-REDIS_DATABASE=/ \
-bin/server 0.0.0.0:8100
+vendor/bin/server 0.0.0.0:8100 --non-blocking
 ```
 
 By default, the server is started with `prod` environment and with the debug
@@ -211,7 +191,7 @@ disabled. You can change this behavior with some flags. You can also silence
 the output and disable the requests report.
 
 ```bash
-bin/server 0.0.0.0:8100 --dev --debug --silence
+vendor/bin/server 0.0.0.0:8100 --dev --debug --silence --non-blocking
 ```
 
 ## Testing the app

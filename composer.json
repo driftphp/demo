@@ -11,7 +11,8 @@
         "symfony/framework-bundle": "4.2.*",
         "symfony/yaml": "4.2.*",
 
-        "apisearch-io/react-symfony-server": "dev-master@dev",
+        "apisearch-io/symfony-async-http-kernel": "dev-master@dev",
+        "apisearch-io/symfony-react-server": "dev-master@dev",
         "clue/redis-react": "*"
     },
     "config": {
@@ -37,14 +38,6 @@
         "symfony/polyfill-php71": "*",
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Apisearch\\ReactSymfonyServer\\ComposerHook::installReactServer"
-        ],
-        "post-update-cmd": [
-            "Apisearch\\ReactSymfonyServer\\ComposerHook::installReactServer"
-        ]
     },
     "conflict": {
         "symfony/symfony": "*"

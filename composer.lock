@@ -4,68 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "19b5469e7060b486cabda889afc0b329",
+    "content-hash": "872b44b28f00870d8d63a96abfcde019",
     "packages": [
-        {
-            "name": "apisearch-io/react-symfony-server",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/apisearch-io/react-symfony-server.git",
-                "reference": "e4decd2c1bb9042586b2f3e30abd245599f864fc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/apisearch-io/react-symfony-server/zipball/e4decd2c1bb9042586b2f3e30abd245599f864fc",
-                "reference": "e4decd2c1bb9042586b2f3e30abd245599f864fc",
-                "shasum": ""
-            },
-            "require": {
-                "apisearch-io/symfony-async-http-kernel": "dev-master",
-                "php": ">=7.1",
-                "react/event-loop": "*",
-                "react/http": "*",
-                "react/promise": "*",
-                "react/socket": "*",
-                "symfony/http-kernel": "*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.5.0",
-                "mmoreram/php-formatter": "^1.3.1",
-                "phpunit/phpunit": "^7.0.0",
-                "symfony/browser-kit": "^4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Apisearch\\ReactSymfonyServer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marc Morera",
-                    "email": "yuhu@mmoreram.com"
-                }
-            ],
-            "description": "ReactPHP based server for Symfony Kernel",
-            "time": "2019-05-09T17:21:36+00:00"
-        },
         {
             "name": "apisearch-io/symfony-async-http-kernel",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/apisearch-io/symfony-async-kernel.git",
-                "reference": "e43442cf07b6575e11faa79a03dfa2e49a9df2e2"
+                "reference": "f509c66425fe9718f2676ce87f8e7cfa179a8a59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apisearch-io/symfony-async-kernel/zipball/e43442cf07b6575e11faa79a03dfa2e49a9df2e2",
-                "reference": "e43442cf07b6575e11faa79a03dfa2e49a9df2e2",
+                "url": "https://api.github.com/repos/apisearch-io/symfony-async-kernel/zipball/f509c66425fe9718f2676ce87f8e7cfa179a8a59",
+                "reference": "f509c66425fe9718f2676ce87f8e7cfa179a8a59",
                 "shasum": ""
             },
             "require": {
@@ -80,13 +32,61 @@
                 "mmoreram/base-bundle": "^1.0.10",
                 "mmoreram/php-formatter": "^1.3.1",
                 "mmoreram/symfony-bundle-dependencies": "^2.0.0",
-                "phpunit/phpunit": "^7.0.0",
-                "symfony/browser-kit": "^4.0"
+                "phpunit/phpunit": "^7.0.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpKernel\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "time": "2019-05-19T21:28:01+00:00"
+        },
+        {
+            "name": "apisearch-io/symfony-react-server",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apisearch-io/symfony-react-server.git",
+                "reference": "adf5c61e02714a44cd8fe7bd9302e5d20566fb1d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apisearch-io/symfony-react-server/zipball/adf5c61e02714a44cd8fe7bd9302e5d20566fb1d",
+                "reference": "adf5c61e02714a44cd8fe7bd9302e5d20566fb1d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "react/event-loop": "^1",
+                "react/http": "^0.8",
+                "react/promise": "^2",
+                "react/socket": "^1",
+                "symfony/http-kernel": "^4.2"
+            },
+            "suggest": {
+                "apisearch-io/symfony-async-http-kernel": "To enable --non-blocking flag and work with Async Kernel"
+            },
+            "bin": [
+                "bin/server"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Apisearch\\SymfonyReactServer\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -99,7 +99,8 @@
                     "email": "yuhu@mmoreram.com"
                 }
             ],
-            "time": "2019-05-10T14:14:52+00:00"
+            "description": "ReactPHP based server for Symfony Kernel",
+            "time": "2019-05-20T10:18:05+00:00"
         },
         {
             "name": "clue/redis-protocol",
@@ -2165,7 +2166,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "apisearch-io/react-symfony-server": 20
+        "apisearch-io/symfony-async-http-kernel": 20,
+        "apisearch-io/symfony-react-server": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
