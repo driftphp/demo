@@ -14,11 +14,16 @@ Let's see the packages we are going to use here.
   a full HTTP server implementation on top of Symfony and ReactPHP Promises
 - [Redis Client](https://github.com/clue/reactphp-redis): an async Redis client
   implementation on top of ReactPHP promises
-  
-> Did you enjoy this demo? Do you think that this Symfony kernel deserves an
-> opportunity inside the ecosystem? Then easy. You can help us by making some
-> tweets with hashtag #asyncSymfony and adding some stars in the projects, both
-> the kernel and the server.
+
+## Help US :heart:
+
+Did you enjoy this demo? Do you think that this Symfony kernel deserves an
+opportunity inside the ecosystem? Then easy. You can help us by making some
+small actions
+
+- Make a tweet with hashtag #asyncSymfony. Tell the world what did you see here
+- :star: the [Symfony Async Kernel](https://github.com/apisearch-io/symfony-async-kernel) repository
+- :star: the [Symfony Async Server](https://github.com/apisearch-io/symfony-react-server) repository
   
 ## Description
 
