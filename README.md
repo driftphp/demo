@@ -15,6 +15,11 @@ Let's see the packages we are going to use here.
 - [Redis Client](https://github.com/clue/reactphp-redis): an async Redis client
   implementation on top of ReactPHP promises
   
+> Did you enjoy this demo? Do you think that this Symfony kernel deserves an
+> opportunity inside the ecosystem? Then easy. You can help us by making some
+> tweets with hashtag #asyncSymfony and adding some stars in the projects, both
+> the kernel and the server.
+  
 ## Description
 
 This project is a sample for integrating Symfony and ReactPHP. The base of the
