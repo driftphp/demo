@@ -11,9 +11,9 @@
         "symfony/framework-bundle": "4.2.*",
         "symfony/yaml": "4.2.*",
 
-        "apisearch-io/symfony-async-http-kernel": "dev-master@dev",
-        "apisearch-io/symfony-react-server": "dev-master@dev",
-        "clue/redis-react": "*"
+        "apisearch-io/symfony-async-http-kernel": "^0.1",
+        "apisearch-io/symfony-react-server": "^0.1",
+        "clue/redis-react": "^2.3"
     },
     "config": {
         "preferred-install": {

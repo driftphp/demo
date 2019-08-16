@@ -8,14 +8,29 @@
     "apisearch-io/symfony-react-server": {
         "version": "dev-master"
     },
+    "cakephp/core": {
+        "version": "3.8.1"
+    },
+    "cakephp/utility": {
+        "version": "3.8.1"
+    },
     "clue/redis-protocol": {
         "version": "v0.3.1"
     },
     "clue/redis-react": {
         "version": "v2.3.0"
     },
+    "doctrine/inflector": {
+        "version": "v1.3.0"
+    },
+    "doctrine/instantiator": {
+        "version": "1.2.0"
+    },
     "evenement/evenement": {
         "version": "v3.0.1"
+    },
+    "indigophp/hash-compat": {
+        "version": "v1.1.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -35,11 +50,17 @@
     "react/cache": {
         "version": "v0.5.0"
     },
+    "react/child-process": {
+        "version": "v0.6.1"
+    },
     "react/dns": {
         "version": "v0.4.17"
     },
     "react/event-loop": {
         "version": "v1.1.0"
+    },
+    "react/filesystem": {
+        "version": "v0.1.2"
     },
     "react/http": {
         "version": "dev-master"
@@ -162,5 +183,32 @@
     },
     "symfony/yaml": {
         "version": "v4.2.8"
+    },
+    "tivie/php-os-detector": {
+        "version": "1.1.0"
+    },
+    "wyrihaximus/cpu-core-detector": {
+        "version": "1.0.2"
+    },
+    "wyrihaximus/file-descriptors": {
+        "version": "1.0.0"
+    },
+    "wyrihaximus/json-throwable": {
+        "version": "2.0.0"
+    },
+    "wyrihaximus/json-utilities": {
+        "version": "1.1.0"
+    },
+    "wyrihaximus/react-child-process-messenger": {
+        "version": "2.9.3"
+    },
+    "wyrihaximus/react-child-process-pool": {
+        "version": "1.5.1"
+    },
+    "wyrihaximus/react-child-process-promise": {
+        "version": "2.0.2"
+    },
+    "wyrihaximus/ticking-promise": {
+        "version": "1.6.3"
     }
 }

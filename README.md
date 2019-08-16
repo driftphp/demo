@@ -57,9 +57,9 @@ both the server and the redis implementation to make asynchronous Redis calls.
 "require": {
     ...
     
-    "apisearch-io/react-symfony-server": "dev-master@dev",
-    "apisearch-io/react-symfony-server": "dev-master@dev",
-    "clue/redis-react": "*"
+    "apisearch-io/symfony-async-http-kernel": "^0.1",
+    "apisearch-io/symfony-react-server": "^0.1",
+    "clue/redis-react": "^2.3"
 },
 ```
 
