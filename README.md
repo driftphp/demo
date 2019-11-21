@@ -1,34 +1,24 @@
-# Symfony and ReactPHP
+# DriftPHP Demo
 
-This is an example of Symfony4 with the brand new Promises based Symfony Kernel.
-At the moment, this project uses an adapter of the kernel, so this feature is
-not included in the regular Symfony kernel distribution.
+This is a simple Demo about how to use properly DriftPHP.
 
-> This is a demo package. 
-
-Let's see the packages we are going to use here.
-- [Symfony Async Kernel](https://github.com/apisearch-io/symfony-async-kernel):
-  an adapter for the Symfony Http Kernel distribution. This new Kernel provides
-  you some async methods to work with the ReactPHP Promise implementation.
-- [Symfony React Server](https://github.com/apisearch-io/symfony-react-server):
-  a full HTTP server implementation on top of Symfony and ReactPHP Promises
-- [Redis Client](https://github.com/clue/reactphp-redis): an async Redis client
-  implementation on top of ReactPHP promises
+> Remember. This is a demo package. We encourage to make us PRs if you find some
+> bugs, but we're not going to add new features unless is necessary. 
 
 ## Help US :heart:
 
-Did you enjoy this demo? Do you think that this Symfony kernel deserves an
+Did you enjoy this demo? Do you think that this DriftPHP Framework deserves an
 opportunity inside the ecosystem? Then easy. You can help us by making some
 small actions
 
-- Make a tweet with hashtag #asyncSymfony. Tell the world what did you see here
-- :star: the [Symfony Async Kernel](https://github.com/apisearch-io/symfony-async-kernel) repository
-- :star: the [Symfony Async Server](https://github.com/apisearch-io/symfony-react-server) repository
+- Make a tweet with hashtag #driftPHP. Tell the world what did you see here
+- :star: the [DriftPHP HTTP Server](https://github.com/driftphp/server) repository
+- :star: the [DriftPHP HTTP Kernel](https://github.com/driftphp/http-kernel) repository
   
 ## Description
 
 This project is a sample for integrating Symfony and ReactPHP. The base of the
-project is a simple and clean Symfony installation using `symfony/skeleton`, so
+project is a simple and clean DriftPHP installation using `drift/skeleton`, so
 that means that, if your code is built on top of that structure, you're a little
 bit nearer than turning your project non-blocking.
 
@@ -42,7 +32,7 @@ sounds.
 /values/{key} DELETE
 ```
 
-We could have implemented the feature by using a regular Symfony installation,
+We could have implemented the feature by using a regular DriftPHP installation,
 by installing an Nginx and by using one of the existing Redis solutions for PHP.
 That would have been the fastest and simplest solution, but we want a little bit
 more.
@@ -67,13 +57,20 @@ both the server and the redis implementation to make asynchronous Redis calls.
 "require": {
     ...
     
-    "apisearch-io/symfony-async-http-kernel": "^0.1",
-    "apisearch-io/symfony-react-server": "^0.1",
+    "drift/http-kernel": "dev-master",
+    "drift/server": "dev-master",
     "clue/redis-react": "^2.3"
 },
 ```
 
 Then, `composer update`.
+
+If you want to install a new skeleton for your new project, you can use
+`composer` to download a clean skeleton.
+
+```bash
+composer create-project -sdev drift/skeleton 
+```
 
 ## Configuration
 
@@ -81,16 +78,16 @@ After installing the server, you should be able to find the `server` file under
 the bin directory. This file is ready to be used in the command line, in a
 DockerFile or in any other environment.
 
-Each Symfony application has a kernel. You will find it under `src/` folder. If
-you check the class, you will find that this kernel extends the Symfony
+Each DriftPHP application has a kernel. You will find it under `Drift/` folder.
+If you check the class, you will find that this kernel extends the Symfony
 component one. So we must change that in order to give your application an
 asynchronous behavior.
 
 ```php
 namespace App;
 
+use Drift\HttpKernel\AsyncKernel;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\HttpKernel\AsyncKernel;
 
 /**
  * My app kernel
@@ -105,7 +102,7 @@ class Kernel extends AsyncKernel
 And that's it. Our application is properly configured.
 
 > Redis connects at localhost in default port. You can change that configuration
-> by changing the hardcoded service definition inside `config/services.yaml`
+> by changing the hardcoded service definition inside `Drift/config/services.yml`
 > file
 
 ## Creating a new Controller
@@ -121,6 +118,8 @@ you call a method, for example `->get($key)` you don't get a value, but a
 promise. 
 
 ```php
+namespace App\Controller;
+
 use App\Redis\RedisWrapper;
 use React\Promise\PromiseInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -193,7 +192,7 @@ it. The server should take care of the rest
 Simple. You only need a port, and that should be enough
 
 ```bash
-vendor/bin/server 0.0.0.0:8100 --non-blocking
+vendor/bin/server run 0.0.0.0:8100
 ```
 
 By default, the server is started with `prod` environment and with the debug
@@ -201,16 +200,23 @@ disabled. You can change this behavior with some flags. You can also silence
 the output and disable the requests report.
 
 ```bash
-vendor/bin/server 0.0.0.0:8100 --dev --debug --silence --non-blocking
+vendor/bin/server run 0.0.0.0:8100 --dev --debug
 ```
+
+You can start the server with an already built-in watcher. Simple,
+
+```bash
+vendor/bin/server watch 0.0.0.0:8100
+```
+
 
 ## Testing the app
 
 Let's test the app. In these lines, we assume that we use the default redis
 configuration, in prod mode and with debug disabled. The server is properly
-installed in `localhost:8100`
+installed in `127.0.0.1:8100`
 
-* Get non existing key (Server response time: **1ms**)
+* Get non existing key (Server response time: **~500μs**)
 
 ```bash
 curl -i -XGET localhost:8100/values/mykey
@@ -226,7 +232,7 @@ Connection: close
 {"key":"key","value":null}
 ```
 
-* Put new value under a new key (Server response time: **1ms**)
+* Put new value under a new key (Server response time: **~500μs**)
 
 ```bash
 curl -i -XPUT -H 'Content-Type: application/json' localhost:8100/values/mykey -d'myvalue'
@@ -242,7 +248,7 @@ Connection: close
 {"key":"mykey","value":"myvalue","message":"OK"}
 ```
 
-* Get existing key (Server response time: **1ms**)
+* Get existing key (Server response time: **~500μs**)
 
 ```bash
 curl -i -XGET localhost:8100/values/mykey
@@ -258,7 +264,7 @@ Connection: close
 {"key":"mykey","value":"myvalue"}
 ```
 
-* Delete existing key (Server response time: **1ms**)
+* Delete existing key (Server response time: **~500μs**)
 
 ```bash
 curl -i -XDELETE localhost:8100/values/mykey
