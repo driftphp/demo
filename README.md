@@ -12,6 +12,8 @@ opportunity inside the ecosystem? Then easy. You can help us by making some
 small actions
 
 - Make a tweet with hashtag #driftPHP. Tell the world what did you see here
+- :star: this demo
+- :star: the [DriftPHP Skeleton](https://github.com/driftphp/skeleton) skeleton
 - :star: the [DriftPHP HTTP Server](https://github.com/driftphp/server) repository
 - :star: the [DriftPHP HTTP Kernel](https://github.com/driftphp/http-kernel) repository
   
@@ -57,8 +59,9 @@ both the server and the redis implementation to make asynchronous Redis calls.
 "require": {
     ...
     
-    "drift/http-kernel": "dev-master",
-    "drift/server": "dev-master",
+    "drift/http-kernel": "^0.1",
+    "drift/server": "^0.1",
+    "drift/react-functions": "^0.1",
     "clue/redis-react": "^2.3"
 },
 ```

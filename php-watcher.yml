@@ -1,6 +1,0 @@
-watch:
-    - src
-
-extensions:
-    - php
-    - yml

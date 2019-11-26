@@ -1,6 +1,6 @@
 parameters:
     kernel.secret: yoursecretshouldbehere
-    app.path: '../../'
+    app.path: '../..'
 
 framework:
     form: false
@@ -19,18 +19,21 @@ services:
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
-        resource: "%app.path%/Controller"
+        resource: "%app.path%/src/Controller"
         tags: ['controller.service_arguments']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Redis\:
-        resource: "%app.path%/Redis"
+    Infrastructure\Redis\:
+        resource: "%app.path%/src/Redis"
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Redis\RedisConfig:
+    Infrastructure\Redis\RedisConfig:
         arguments:
             - "localhost"
             - 6379
+
+    Domain\ValueRepository:
+        alias: Infrastructure\Redis\RedisValueRepository

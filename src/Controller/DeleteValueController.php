@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Controller;
-
 /*
- * This file is part of the {Package name}.
+ * This file is part of the DriftPHP Demo.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,9 +10,13 @@ namespace App\Controller;
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  */
-use App\Redis\RedisWrapper;
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use Domain\ValueRepository;
 use React\Promise\PromiseInterface;
-use React\Promise\RejectedPromise;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,20 +26,20 @@ use Symfony\Component\HttpFoundation\Request;
 class DeleteValueController
 {
     /**
-     * @var RedisWrapper
+     * @var ValueRepository
      *
-     * Redis Wrapper
+     * Value Repository
      */
-    private $redisWrapper;
+    private $valueRepository;
 
     /**
      * PutValueController constructor.
      *
-     * @param RedisWrapper $redisWrapper
+     * @param ValueRepository $valueRepository
      */
-    public function __construct(RedisWrapper $redisWrapper)
+    public function __construct(ValueRepository $valueRepository)
     {
-        $this->redisWrapper = $redisWrapper;
+        $this->valueRepository = $valueRepository;
     }
 
     /**
@@ -54,9 +56,8 @@ class DeleteValueController
             ->get('key');
 
         return $this
-            ->redisWrapper
-            ->getClient()
-            ->del($key)
+            ->valueRepository
+            ->delete($key)
             ->then(function(string $response) use ($key) {
                 return new JsonResponse(
                     [
