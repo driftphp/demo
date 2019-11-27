@@ -10,6 +10,12 @@ framework:
     php_errors:
         log: false
 
+redis:
+    clients:
+        main:
+            host: 127.0.0.1
+            port: 6379
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -29,11 +35,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-    Infrastructure\Redis\RedisConfig:
-        arguments:
-            - "localhost"
-            - 6379
 
     Domain\ValueRepository:
         alias: Infrastructure\Redis\RedisValueRepository

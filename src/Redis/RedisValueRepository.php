@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Redis;
 
+use Clue\React\Redis\Client;
 use Domain\ValueRepository;
 use React\Promise\PromiseInterface;
 
@@ -24,20 +25,20 @@ use React\Promise\PromiseInterface;
 class RedisValueRepository implements ValueRepository
 {
     /**
-     * @var RedisWrapper
+     * @var Client
      *
-     * Redis Wrapper
+     * Redis Client
      */
-    private $redisWrapper;
+    private $client;
 
     /**
      * PutValueController constructor.
      *
-     * @param RedisWrapper $redisWrapper
+     * @param Client $client
      */
-    public function __construct(RedisWrapper $redisWrapper)
+    public function __construct(Client $client)
     {
-        $this->redisWrapper = $redisWrapper;
+        $this->client = $client;
     }
 
     /**
@@ -51,8 +52,7 @@ class RedisValueRepository implements ValueRepository
     public function set(string $key, string $value): PromiseInterface
     {
         return $this
-            ->redisWrapper
-            ->getClient()
+            ->client
             ->set($key, $value);
     }
 
@@ -66,8 +66,7 @@ class RedisValueRepository implements ValueRepository
     public function get(string $key): PromiseInterface
     {
         return $this
-            ->redisWrapper
-            ->getClient()
+            ->client
             ->get($key);
     }
 
@@ -81,8 +80,7 @@ class RedisValueRepository implements ValueRepository
     public function delete(string $key): PromiseInterface
     {
         return $this
-            ->redisWrapper
-            ->getClient()
+            ->client
             ->del($key);
     }
 }

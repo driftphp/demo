@@ -12,7 +12,7 @@
         "drift/http-kernel": "^0.1",
         "drift/server": "^0.1",
         "drift/react-functions": "^0.1",
-        "clue/redis-react": "^2.3"
+        "drift/redis-bundle": "^0.1"
     },
 
     "autoload": {
