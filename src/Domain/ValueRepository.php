@@ -45,6 +45,13 @@ interface ValueRepository
     public function get(string $key) : PromiseInterface;
 
     /**
+     * Get all keys and values
+     *
+     * @return PromiseInterface
+     */
+    public function getAll() : PromiseInterface;
+
+    /**
      * Delete value given a key
      *
      * @param string $key

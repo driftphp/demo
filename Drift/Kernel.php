@@ -37,7 +37,7 @@ class Kernel extends AsyncKernel
         $contents = require $this->getApplicationLayerDir().'/config/bundles.php';
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
-                yield new $class();
+                yield new $class($this);
             }
         }
     }
@@ -53,7 +53,7 @@ class Kernel extends AsyncKernel
     /**
      * @return string
      */
-    private function getApplicationLayerDir(): string
+    public function getApplicationLayerDir(): string
     {
         return $this->getProjectDir().'/Drift';
     }

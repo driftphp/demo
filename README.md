@@ -1,6 +1,8 @@
 # DriftPHP Demo
 
-This is a simple Demo about how to use properly DriftPHP.
+This is a simple Demo about how to use properly DriftPHP. Please, read carefully
+our [Documentation](https://drift.io) in order to understand the rationale
+behind each functionality.
 
 > Remember. This is a demo package. We encourage to make us PRs if you find some
 > bugs, but we're not going to add new features unless is necessary. 
@@ -16,6 +18,10 @@ small actions
 - :star: the [DriftPHP Skeleton](https://github.com/driftphp/skeleton) skeleton
 - :star: the [DriftPHP HTTP Server](https://github.com/driftphp/server) repository
 - :star: the [DriftPHP HTTP Kernel](https://github.com/driftphp/http-kernel) repository
+
+You can join our small community in 
+[DriftPHP in Gitter](https://gitter.im/driftphp/community) if you have any
+issue or question around this project. We will be very happy to say hello :)
   
 ## Description
 
@@ -26,7 +32,8 @@ bit nearer than turning your project non-blocking.
 
 In this case, we have build an HTTP key/value service, allowing us to store
 string values under some keys, get that values and delete them. As simple as it
-sounds.
+sounds. We will use Twig as well to render some small templates with some of
+this stored information.
 
 ```yml
 /values/{key} GET
@@ -49,180 +56,71 @@ repositories, we can have everything you need here in one single server.
 
 Let's check how.
 
-## Installation
+## Installation - Docker
 
-We can install the server by using composer. In this example, we will install
-both the server and the redis implementation to make asynchronous Redis calls.
-
-
-```yaml
-"require": {
-    ...
-    
-    "drift/http-kernel": "^0.1",
-    "drift/server": "^0.1",
-    "drift/react-functions": "^0.1",
-    "clue/redis-react": "^2.3"
-},
-```
-
-Then, `composer update`.
-
-If you want to install a new skeleton for your new project, you can use
-`composer` to download a clean skeleton.
+You can start using this demo by using `docker-compose`. As easy as it sounds.
 
 ```bash
-composer create-project -sdev drift/skeleton 
+docker-compose up --build
 ```
 
-## Configuration
-
-After installing the server, you should be able to find the `server` file under
-the bin directory. This file is ready to be used in the command line, in a
-DockerFile or in any other environment.
-
-Each DriftPHP application has a kernel. You will find it under `Drift/` folder.
-If you check the class, you will find that this kernel extends the Symfony
-component one. So we must change that in order to give your application an
-asynchronous behavior.
-
-```php
-namespace App;
-
-use Drift\HttpKernel\AsyncKernel;
-use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-
-/**
- * My app kernel
- */
-class Kernel extends AsyncKernel
-{
-    use MicroKernelTrait;
-    ...
-}
-```
-
-And that's it. Our application is properly configured.
-
-> Redis connects at localhost in default port. You can change that configuration
-> by changing the hardcoded service definition inside `Drift/config/services.yml`
-> file
-
-## Creating a new Controller
-
-This is the easiest part of all. You can create controllers the same way you've
-done until now, but the **only** difference is that, hereinafter, you won't
-return Response instances, but Promises that, once resolved, will return a
-Response object.
-
-Let's take a look at `GetValueController` code. This is the response code for
-the controller called method. This Redis client is asynchronous, so each time
-you call a method, for example `->get($key)` you don't get a value, but a
-promise. 
-
-```php
-namespace App\Controller;
-
-use App\Redis\RedisWrapper;
-use React\Promise\PromiseInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-
-/**
- * Class GetValueController
- */
-class GetValueController
-{
-    /**
-     * @var RedisWrapper
-     *
-     * Redis Wrapper
-     */
-    private $redisWrapper;
-
-    /**
-     * PutValueController constructor.
-     *
-     * @param RedisWrapper $redisWrapper
-     */
-    public function __construct(RedisWrapper $redisWrapper)
-    {
-        $this->redisWrapper = $redisWrapper;
-    }
-
-    /**
-     * Invoke
-     *
-     * @param Request $request
-     *
-     * @return PromiseInterface
-     */
-    public function __invoke(Request $request)
-    {
-        $key = $request
-            ->attributes
-            ->get('key');
-
-        return $this
-            ->redisWrapper
-            ->getClient()
-            ->get($key)
-            ->then(function($value) use ($key) {
-                return new JsonResponse(
-                    [
-                        'key' => $key,
-                        'value' => is_string($value)
-                            ? $value
-                            : null,
-                    ],
-                    200
-                );
-            });
-    }
-}
-```
-
-When the promise is resolved, the `then` method is called with the given result
-as a unique parameter. Once we have this value, we return a `JsonResponse`
-instance inside the callback.
-
-And because a `->then()` method returns a new Promise, and we're returning
-directly this value, the kernel receives a Promise and not a value. And that's
-it. The server should take care of the rest
-
-## Starting the server
-
-Simple. You only need a port, and that should be enough
+Once the whole environment is up and running, you'll be able to request the
+server by accessing the port `8000`
 
 ```bash
-vendor/bin/server run 0.0.0.0:8100
+curl http://127.0.0.1:8000/
 ```
 
-By default, the server is started with `prod` environment and with the debug
-disabled. You can change this behavior with some flags. You can also silence
-the output and disable the requests report.
+> You can change the exposed port in the `docker-composer.yml` file, changing
+> the first part of the line `8000:8000`. For example, if you want to expose 
+> this demo to port 9000, change the line to `9000:8000` and run it again
+
+## Installation - Localhost
+
+You can start this demo as well by starting the server by hand. Of course, in
+this case, you'll need to start all required services by hand.
+
+- Redis
+
+Once you have all your service up and running, and visible from your host
+network, then you'll need to install all code requirements by using composer
 
 ```bash
-vendor/bin/server run 0.0.0.0:8100 --dev --debug
+composer install --prefer-dist --no-suggest
 ```
 
-You can start the server with an already built-in watcher. Simple,
+Once all vendors are installed, we'll need to start the server, choosing a port
+where to connect our socket. In this case, we will use the port `8000`, but
+feel free to change it. Don't forget to define some environment variables.
 
 ```bash
-vendor/bin/server watch 0.0.0.0:8100
+REDIS_HOST=127.0.0.1 php vendor/bin/server run 0.0.0.0:8000
 ```
 
+Once the whole environment is up and running, you'll be able to request the
+server by accessing the port `8000`
+
+```bash
+curl http://127.0.0.1:8000/
+```
+
+You can start the server as a watcher mode, so each change on your base code
+will restart properly the server.
+
+```bash
+REDIS_HOST=127.0.0.1 php vendor/bin/server watch 0.0.0.0:8000
+```
 
 ## Testing the app
 
 Let's test the app. In these lines, we assume that we use the default redis
 configuration, in prod mode and with debug disabled. The server is properly
-installed in `127.0.0.1:8100`
+installed in `127.0.0.1:8000`
 
 * Get non existing key (Server response time: **~500μs**)
 
 ```bash
-curl -i -XGET localhost:8100/values/mykey
+curl -i -XGET localhost:8000/values/mykey
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -238,7 +136,7 @@ Connection: close
 * Put new value under a new key (Server response time: **~500μs**)
 
 ```bash
-curl -i -XPUT -H 'Content-Type: application/json' localhost:8100/values/mykey -d'myvalue'
+curl -i -XPUT -H 'Content-Type: application/json' localhost:8000/values/mykey -d'myvalue'
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -254,7 +152,7 @@ Connection: close
 * Get existing key (Server response time: **~500μs**)
 
 ```bash
-curl -i -XGET localhost:8100/values/mykey
+curl -i -XGET localhost:8000/values/mykey
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -270,7 +168,7 @@ Connection: close
 * Delete existing key (Server response time: **~500μs**)
 
 ```bash
-curl -i -XDELETE localhost:8100/values/mykey
+curl -i -XDELETE localhost:8000/values/mykey
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -282,3 +180,9 @@ Connection: close
 
 {"key":"mykey","message":"1"}
 ```
+
+* You can even see two small rendered pages using Twig as the templating engine.
+On one hand you can see all keys and values from our system, accessing through
+your browser to `http://127.0.0.1:8000/`, and if you click any of these lines,
+you will see the unique page of this key value at `http://127.0.0.1:8000/key`.
+Server response is exactly the same than previous requests, even using Twig. 
