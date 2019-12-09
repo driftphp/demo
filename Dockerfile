@@ -11,7 +11,7 @@ RUN apk --no-cache add \
     php7-bcmath php7-pcntl php7-redis php7-json \
     php7-phar php7-mbstring php7-openssl php7-xml \
     php7-tokenizer php7-dom php7-xmlwriter php7-posix \
-    php7-sockets
+    php7-sockets php7-fileinfo
 
 #
 # Composer

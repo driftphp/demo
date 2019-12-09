@@ -4,6 +4,10 @@ This is a simple Demo about how to use properly DriftPHP. Please, read carefully
 our [Documentation](https://drift.io) in order to understand the rationale
 behind each functionality.
 
+<p align="center">
+  <img src="public/driftphp.png">
+</p>
+
 > Remember. This is a demo package. We encourage to make us PRs if you find some
 > bugs, but we're not going to add new features unless is necessary. 
 
