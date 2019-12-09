@@ -32,6 +32,13 @@ class RedisValueRepository implements ValueRepository
     private $client;
 
     /**
+     * @var string
+     *
+     * Prefix
+     */
+    private const HASH = 'demo';
+
+    /**
      * PutValueController constructor.
      *
      * @param Client $client
@@ -53,7 +60,7 @@ class RedisValueRepository implements ValueRepository
     {
         return $this
             ->client
-            ->set($key, $value);
+            ->hset(self::HASH, $key, $value);
     }
 
     /**
@@ -67,7 +74,30 @@ class RedisValueRepository implements ValueRepository
     {
         return $this
             ->client
-            ->get($key);
+            ->hget(self::HASH, $key);
+    }
+
+    /**
+     * Get all keys and values
+     *
+     * @return PromiseInterface
+     */
+    public function getAll() : PromiseInterface
+    {
+        return $this
+            ->client
+            ->hgetall(self::HASH)
+            ->then(function(array $values) {
+
+                return array_combine(
+                    array_filter($values, function(int $key) {
+                        return $key % 2 === 0;
+                    }, ARRAY_FILTER_USE_KEY),
+                    array_filter($values, function(int $key) {
+                        return $key % 2 === 1;
+                    }, ARRAY_FILTER_USE_KEY)
+                );
+            });
     }
 
     /**
@@ -81,6 +111,6 @@ class RedisValueRepository implements ValueRepository
     {
         return $this
             ->client
-            ->del($key);
+            ->hdel(self::HASH, $key);
     }
 }

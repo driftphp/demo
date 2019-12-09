@@ -13,8 +13,7 @@ framework:
 redis:
     clients:
         main:
-            host: 127.0.0.1
-            port: 6379
+            host: "%env(REDIS_HOST)%"
 
 services:
     # default configuration for services in *this* file

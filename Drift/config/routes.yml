@@ -1,3 +1,7 @@
+#
+# API
+#
+
 put:
   path: /values/{key}
   controller: App\Controller\PutValueController
@@ -12,3 +16,17 @@ get:
   path: /values/{key}
   controller: App\Controller\GetValueController
   methods: ["GET"]
+
+#
+# Public
+#
+view_values:
+  path: /
+  controller: App\Controller\ViewValuesController
+  methods: GET
+
+
+view_value:
+  path: /{key}
+  controller: App\Controller\ViewValueController
+  methods: GET
