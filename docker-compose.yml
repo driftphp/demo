@@ -4,14 +4,23 @@ services:
   redis:
     image: "redis:alpine"
     networks: [main]
-
-  server:
-    build: .
     ports:
-      - "8000:8000"
+      - "6379:6379"
+
+  mysql:
+    image: "mysql:5"
     networks: [main]
+    ports:
+      - "3306:3306"
     environment:
-      REDIS_HOST: redis
+      MYSQL_ROOT_PASSWORD: root
+
+  amqp:
+    image: "rabbitmq:3-management"
+    networks: [main]
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
 networks:
   main:

@@ -10,10 +10,39 @@ framework:
     php_errors:
         log: false
 
+amqp:
+    clients:
+        commands:
+            host: "%env(AMQP_HOST)%"
+            port: 5672
+            vhost: /
+            user: guest
+            password: guest
+
 redis:
     clients:
-        main:
+        values:
             host: "%env(REDIS_HOST)%"
+
+        commands:
+            host: "%env(REDIS_HOST)%"
+
+bus:
+    command_bus:
+        async_adapter:
+            amqp:
+                client: commands
+
+preload:
+    services:
+        "Domain\\ValueRepository": ~
+        "App\\Controller\\ViewValuesController": ~
+    presets:
+        - "@symfony"
+        - "@drift"
+        - "@react"
+        - "Drift\\Twig\\Preset\\TwigPreset"
+        - "Drift\\Redis\\Preset\\RedisPreset"
 
 services:
     # default configuration for services in *this* file
@@ -27,13 +56,29 @@ services:
         resource: "%app.path%/src/Controller"
         tags: ['controller.service_arguments']
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
+
+    # Query and Command handlers are autowired under the Domain namespace. With
+    # these simple tags, we are defining that all classes found there are
+    # defined as handlers, taking the default method class parameter as usable
+    # class to handle
+    Domain\QueryHandler\:
+        resource: "%app.path%/src/Domain/QueryHandler"
+        tags: ['query_handler']
+
+    Domain\CommandHandler\:
+        resource: "%app.path%/src/Domain/CommandHandler"
+        tags: ['command_handler']
+
+
+    # Infrastructure classes are defined under \Infrastructure namespace. You
+    # can find the alias in composer.json under the PSR-4 section. Autowiring is
+    # used here to create all services, and final alias is generated after all.
+    # Feel free to comment the unused adapter for performance increasing.
     Infrastructure\Redis\:
         resource: "%app.path%/src/Redis"
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Infrastructure\Mysql\:
+    #    resource: "%app.path%/src/Mysql"
 
     Domain\ValueRepository:
         alias: Infrastructure\Redis\RedisValueRepository

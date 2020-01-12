@@ -15,7 +15,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Domain\ValueRepository;
+use Domain\Command\PutValue;
+use Drift\Bus\Bus\CommandBus;
 use React\Promise\PromiseInterface;
 use React\Promise\RejectedPromise;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,20 +28,18 @@ use Symfony\Component\HttpFoundation\Request;
 class PutValueController
 {
     /**
-     * @var ValueRepository
-     *
-     * Value Repository
+     * @var CommandBus
      */
-    private $valueRepository;
+    private $commandBus;
 
     /**
-     * PutValueController constructor.
+     * DeleteValueController constructor.
      *
-     * @param ValueRepository $valueRepository
+     * @param CommandBus $commandBus
      */
-    public function __construct(ValueRepository $valueRepository)
+    public function __construct(CommandBus $commandBus)
     {
-        $this->valueRepository = $valueRepository;
+        $this->commandBus = $commandBus;
     }
 
     /**
@@ -66,14 +65,13 @@ class PutValueController
         }
 
         return $this
-            ->valueRepository
-            ->set($key, $value)
-            ->then(function(string $response) use ($key, $value) {
+            ->commandBus
+            ->execute(new PutValue($key, $value))
+            ->then(function() use ($key, $value) {
                 return new JsonResponse(
                     [
                         'key' => $key,
-                        'value' => $value,
-                        'message' => $response
+                        'value' => $value
                     ],
                     200
                 );

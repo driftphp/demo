@@ -15,7 +15,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Domain\ValueRepository;
+use Domain\Query\GetValues;
+use Drift\Bus\Bus\QueryBus;
 use React\Promise\PromiseInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,25 +28,22 @@ use Twig\Environment;
 class ViewValuesController
 {
     /**
-     * @var ValueRepository
-     *
-     * Value Repository
+     * @var QueryBus
      */
-    private $valueRepository;
-    private $twig;
+    private $queryBus;
 
     /**
-     * PutValueController constructor.
+     * DeleteValueController constructor.
      *
-     * @param ValueRepository $valueRepository
+     * @param QueryBus $queryBus
      * @param Environment $twig
      */
     public function __construct(
-        ValueRepository $valueRepository,
+        QueryBus $queryBus,
         Environment $twig
     )
     {
-        $this->valueRepository = $valueRepository;
+        $this->queryBus = $queryBus;
         $this->twig = $twig;
     }
 
@@ -59,14 +57,16 @@ class ViewValuesController
     public function __invoke(Request $request)
     {
         return $this
-            ->valueRepository
-            ->getAll()
+            ->queryBus
+            ->ask(new GetValues)
             ->then(function(array $values) {
                 $template = $this->twig->load('redis/view_values.twig');
+                $value = $template->render([
+                    'values' => $values
+                ]);
+
                 return new Response(
-                    $template->render([
-                        'values' => $values
-                    ]),
+                    $value,
                     200
                 );
             });

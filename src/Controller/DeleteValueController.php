@@ -15,7 +15,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Domain\ValueRepository;
+use Domain\Command\DeleteValue;
+use Drift\Bus\Bus\CommandBus;
 use React\Promise\PromiseInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,20 +27,18 @@ use Symfony\Component\HttpFoundation\Request;
 class DeleteValueController
 {
     /**
-     * @var ValueRepository
-     *
-     * Value Repository
+     * @var CommandBus
      */
-    private $valueRepository;
+    private $commandBus;
 
     /**
-     * PutValueController constructor.
+     * DeleteValueController constructor.
      *
-     * @param ValueRepository $valueRepository
+     * @param CommandBus $commandBus
      */
-    public function __construct(ValueRepository $valueRepository)
+    public function __construct(CommandBus $commandBus)
     {
-        $this->valueRepository = $valueRepository;
+        $this->commandBus = $commandBus;
     }
 
     /**
@@ -56,8 +55,8 @@ class DeleteValueController
             ->get('key');
 
         return $this
-            ->valueRepository
-            ->delete($key)
+            ->commandBus
+            ->execute(new DeleteValue($key))
             ->then(function(string $response) use ($key) {
                 return new JsonResponse(
                     [

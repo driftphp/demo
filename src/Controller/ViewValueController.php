@@ -15,7 +15,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Domain\ValueRepository;
+use Domain\KeyNotFoundException;
+use Domain\Query\GetValue;
+use Drift\Bus\Bus\QueryBus;
 use Drift\Twig\Controller\RenderableController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,20 +27,18 @@ use Symfony\Component\HttpFoundation\Request;
 class ViewValueController implements RenderableController
 {
     /**
-     * @var ValueRepository
-     *
-     * Value Repository
+     * @var QueryBus
      */
-    private $valueRepository;
+    private $queryBus;
 
     /**
-     * PutValueController constructor.
+     * DeleteValueController constructor.
      *
-     * @param ValueRepository $valueRepository
+     * @param QueryBus $queryBus
      */
-    public function __construct(ValueRepository $valueRepository)
+    public function __construct(QueryBus $queryBus)
     {
-        $this->valueRepository = $valueRepository;
+        $this->queryBus = $queryBus;
     }
 
     /**
@@ -57,8 +57,8 @@ class ViewValueController implements RenderableController
         return [
             'key' => $key,
             'value' => $this
-                ->valueRepository
-                ->get($key)
+                ->queryBus
+                ->ask(new GetValue($key))
         ];
     }
 

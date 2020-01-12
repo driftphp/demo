@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  server:
+    build: .
+    ports:
+      - "8000:8000"
+    networks: [main]
+    command: ["sh", "/wait-and-run.sh", "/server.sh"]
+    environment:
+      AMQP_HOST: amqp
+      REDIS_HOST: redis
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+  command-consumer:
+    build: .
+    networks: [main]
+    command: ["sh", "/wait-and-run.sh", "/command-consumer.sh"]
+    environment:
+      AMQP_HOST: amqp
+      REDIS_HOST: redis
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
