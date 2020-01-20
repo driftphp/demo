@@ -59,7 +59,7 @@ repositories, we can have everything you need here in one single server.
 
 Let's check how.
 
-## Installation - Docker
+## Installation - Docker Compose
 
 You can start using this demo by using `docker-compose`. As easy as it sounds.
 
@@ -77,42 +77,6 @@ curl http://127.0.0.1:8000/
 > You can change the exposed port in the `docker-composer.yml` file, changing
 > the first part of the line `8000:8000`. For example, if you want to expose 
 > this demo to port 9000, change the line to `9000:8000` and run it again
-
-## Installation - Localhost
-
-You can start this demo as well by starting the server by hand. Of course, in
-this case, you'll need to start all required services by hand.
-
-- Redis
-
-Once you have all your service up and running, and visible from your host
-network, then you'll need to install all code requirements by using composer
-
-```bash
-composer install --prefer-dist --no-suggest
-```
-
-Once all vendors are installed, we'll need to start the server, choosing a port
-where to connect our socket. In this case, we will use the port `8000`, but
-feel free to change it. Don't forget to define some environment variables.
-
-```bash
-REDIS_HOST=127.0.0.1 php vendor/bin/server run 0.0.0.0:8000
-```
-
-Once the whole environment is up and running, you'll be able to request the
-server by accessing the port `8000`
-
-```bash
-curl http://127.0.0.1:8000/
-```
-
-You can start the server as a watcher mode, so each change on your base code
-will restart properly the server.
-
-```bash
-REDIS_HOST=127.0.0.1 php vendor/bin/server watch 0.0.0.0:8000
-```
 
 ## Testing the app
 
