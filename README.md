@@ -18,10 +18,7 @@ opportunity inside the ecosystem? Then easy. You can help us by making some
 small actions
 
 - Make a tweet with hashtag #driftPHP. Tell the world what did you see here
-- :star: this demo
-- :star: the [DriftPHP Skeleton](https://github.com/driftphp/skeleton) skeleton
-- :star: the [DriftPHP HTTP Server](https://github.com/driftphp/server) repository
-- :star: the [DriftPHP HTTP Kernel](https://github.com/driftphp/http-kernel) repository
+- :star: our used components by doing just `composer thanks`
 
 You can join our small community in 
 [DriftPHP in Gitter](https://gitter.im/driftphp/community) if you have any
@@ -188,5 +185,5 @@ Connection: close
 * You can even see two small rendered pages using Twig as the templating engine.
 On one hand you can see all keys and values from our system, accessing through
 your browser to `http://127.0.0.1:8000/`, and if you click any of these lines,
-you will see the unique page of this key value at `http://127.0.0.1:8000/key`.
+you will see the unique page of this key value at `http://127.0.0.1:8000/mykey`.
 Server response is exactly the same than previous requests, even using Twig. 

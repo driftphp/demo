@@ -1,26 +1,30 @@
 version: '3'
 
 services:
+
   redis:
     image: "redis:alpine"
+    container_name: redis
     networks: [main]
-    ports:
-      - "6379:6379"
-
-  mysql:
-    image: "mysql:5"
-    networks: [main]
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
 
   amqp:
-    image: "rabbitmq:3-management"
+    image: "rabbitmq:3"
+    container_name: amqp
     networks: [main]
+
+  server:
+    build: .
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "8000:8000"
+    networks: [main]
+    command: ["sh", "/wait-and-run.sh", "/server.sh"]
+    env_file: .env
+
+  command-consumer:
+    build: .
+    networks: [main]
+    command: ["sh", "/wait-and-run.sh", "/command-consumer.sh"]
+    env_file: .env
 
 networks:
   main:

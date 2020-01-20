@@ -22,7 +22,7 @@
         "drift/http-kernel": "0.1.*",
         "drift/server": "0.1.*",
         "drift/react-functions": "0.1.*",
-        "drift/bus-bundle": "0.1.*",
+        "drift/command-bus-bundle": "0.1.*",
         "drift/redis-bundle": "0.1.*",
         "drift/twig-bundle": "0.1.*",
         "drift/preload-bundle": "0.1.*",

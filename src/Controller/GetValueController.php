@@ -16,10 +16,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Domain\Query\GetValue;
-use Drift\Bus\Bus\QueryBus;
+use Drift\CommandBus\Bus\QueryBus;
 use React\Promise\PromiseInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class GetValueController
@@ -58,15 +59,16 @@ class GetValueController
             ->queryBus
             ->ask(new GetValue($key))
             ->then(function($value) use ($key) {
-                return new JsonResponse(
-                    [
-                        'key' => $key,
-                        'value' => is_string($value)
-                            ? $value
-                            : null,
-                    ],
-                    200
-                );
+
+                return is_string($value)
+                    ?  new JsonResponse(
+                        [
+                            'key' => $key,
+                            'value' => $value,
+                        ],
+                        200
+                    )
+                    : new Response('', 404);
             });
     }
 }

@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Domain\Command\DeleteValue;
-use Drift\Bus\Bus\CommandBus;
+use Drift\CommandBus\Bus\CommandBus;
 use React\Promise\PromiseInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,16 +57,13 @@ class DeleteValueController
         return $this
             ->commandBus
             ->execute(new DeleteValue($key))
-            ->then(function(string $response) use ($key) {
+            ->then(function() use ($key) {
                 return new JsonResponse(
                     [
                         'key' => $key,
-                        'message' => $response === '1'
-                            ? 'OK'
-                            : 'Key not found'
-                        ,
+                        'message' => 'Accepted',
                     ],
-                    200
+                    202
                 );
             });
     }

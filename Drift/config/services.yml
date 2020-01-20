@@ -10,6 +10,10 @@ framework:
     php_errors:
         log: false
 
+
+#
+# AMQP Bundle configuration
+#
 amqp:
     clients:
         commands:
@@ -19,20 +23,30 @@ amqp:
             user: guest
             password: guest
 
+
+#
+# Redis Bundle configuration
+#
 redis:
     clients:
         values:
             host: "%env(REDIS_HOST)%"
 
-        commands:
-            host: "%env(REDIS_HOST)%"
 
-bus:
+#
+# Command Bus Bundle configuration
+#
+command_bus:
     command_bus:
         async_adapter:
             amqp:
                 client: commands
+                queue: "%env(AMQP_COMMANDS_QUEUE)%"
 
+
+#
+# Preload Bundle configuration
+#
 preload:
     services:
         "Domain\\ValueRepository": ~
@@ -76,9 +90,6 @@ services:
     # Feel free to comment the unused adapter for performance increasing.
     Infrastructure\Redis\:
         resource: "%app.path%/src/Redis"
-
-    # Infrastructure\Mysql\:
-    #    resource: "%app.path%/src/Mysql"
 
     Domain\ValueRepository:
         alias: Infrastructure\Redis\RedisValueRepository

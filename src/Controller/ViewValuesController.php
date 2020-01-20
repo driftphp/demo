@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Domain\Query\GetValues;
-use Drift\Bus\Bus\QueryBus;
+use Drift\CommandBus\Bus\QueryBus;
 use React\Promise\PromiseInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

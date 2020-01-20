@@ -1,0 +1,19 @@
+### API - GET key
+PUT http://localhost:8000/values/mykey
+
+myvalue
+
+### API - PUT key value
+GET http://localhost:8000/values/mykey
+Content-Type: application/json
+
+### API - DELETE key
+DELETE http://localhost:8000/values/mykey
+
+### TWIG - GET all keys
+GET http://localhost:8000/
+
+### TWIG - GET key
+GET http://localhost:8000/mykey
+
+###

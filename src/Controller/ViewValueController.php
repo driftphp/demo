@@ -15,9 +15,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Domain\KeyNotFoundException;
 use Domain\Query\GetValue;
-use Drift\Bus\Bus\QueryBus;
+use Drift\CommandBus\Bus\QueryBus;
 use Drift\Twig\Controller\RenderableController;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Domain\Command\PutValue;
-use Drift\Bus\Bus\CommandBus;
+use Drift\CommandBus\Bus\CommandBus;
 use React\Promise\PromiseInterface;
 use React\Promise\RejectedPromise;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -71,9 +71,10 @@ class PutValueController
                 return new JsonResponse(
                     [
                         'key' => $key,
-                        'value' => $value
+                        'value' => $value,
+                        'message' => 'Accepted'
                     ],
-                    200
+                    202
                 );
             });
     }
