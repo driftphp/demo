@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,7 +22,7 @@ use React\MySQL\QueryResult;
 use React\Promise\PromiseInterface;
 
 /**
- * Class MysqlValueRepository
+ * Class MysqlValueRepository.
  */
 class MysqlValueRepository implements ValueRepository
 {
@@ -51,7 +51,7 @@ class MysqlValueRepository implements ValueRepository
     }
 
     /**
-     * Set value given a key and a value
+     * Set value given a key and a value.
      *
      * @param string $key
      * @param string $value
@@ -62,14 +62,14 @@ class MysqlValueRepository implements ValueRepository
     {
         return $this
             ->connection
-            ->query("INSERT INTO demo (key, value) VALUES (?, ?)", [
+            ->query('INSERT INTO demo (key, value) VALUES (?, ?)', [
                 $key,
-                $value
+                $value,
             ]);
     }
 
     /**
-     * Get value given a key
+     * Get value given a key.
      *
      * @param string $key
      *
@@ -79,10 +79,10 @@ class MysqlValueRepository implements ValueRepository
     {
         return $this
             ->connection
-            ->query("SELECT d.key as `key`, d.value as `value` from demo d WHERE `key` = ?", [
+            ->query('SELECT d.key as `key`, d.value as `value` from demo d WHERE `key` = ?', [
                 $key,
             ])
-            ->then(function(QueryResult $result) use ($key) {
+            ->then(function (QueryResult $result) use ($key) {
                 if (empty($result->resultRows)) {
                     throw KeyNotFoundException::createFromKey($key);
                 }
@@ -92,16 +92,16 @@ class MysqlValueRepository implements ValueRepository
     }
 
     /**
-     * Get all keys and values
+     * Get all keys and values.
      *
      * @return PromiseInterface
      */
-    public function getAll() : PromiseInterface
+    public function getAll(): PromiseInterface
     {
         return $this
             ->connection
-            ->query("SELECT d.key as `key`, d.value as `value` from demo d")
-            ->then(function(QueryResult $result) {
+            ->query('SELECT d.key as `key`, d.value as `value` from demo d')
+            ->then(function (QueryResult $result) {
                 $values = [];
                 foreach ($result->resultRows as $value) {
                     $values[$value['key']] = $value['value'];
@@ -112,7 +112,7 @@ class MysqlValueRepository implements ValueRepository
     }
 
     /**
-     * Delete value given a key
+     * Delete value given a key.
      *
      * @param string $key
      *
@@ -122,7 +122,7 @@ class MysqlValueRepository implements ValueRepository
     {
         return $this
             ->connection
-            ->query("DELETE FROM demo (key, value) WHERE id = ?", [
+            ->query('DELETE FROM demo (key, value) WHERE id = ?', [
                 $key,
             ]);
     }

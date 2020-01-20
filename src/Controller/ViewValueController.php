@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo.
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,7 +21,7 @@ use Drift\Twig\Controller\RenderableController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ViewValueController
+ * Class ViewValueController.
  */
 class ViewValueController implements RenderableController
 {
@@ -41,13 +41,13 @@ class ViewValueController implements RenderableController
     }
 
     /**
-     * Invoke
+     * Invoke.
      *
      * @param Request $request
      *
      * @return array
      */
-    public function __invoke(Request $request) : array
+    public function __invoke(Request $request): array
     {
         $key = $request
             ->attributes
@@ -57,12 +57,12 @@ class ViewValueController implements RenderableController
             'key' => $key,
             'value' => $this
                 ->queryBus
-                ->ask(new GetValue($key))
+                ->ask(new GetValue($key)),
         ];
     }
 
     /**
-     * Get render template
+     * Get render template.
      *
      * @return string
      */

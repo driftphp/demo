@@ -1,5 +1,18 @@
 <?php
 
+/*
+ * This file is part of the DriftPHP Project
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * Feel free to edit as you please, and have fun.
+ *
+ * @author Marc Morera <yuhu@mmoreram.com>
+ */
+
+declare(strict_types=1);
+
 namespace Domain\CommandHandler;
 
 use Domain\Command\DeleteValue;
@@ -7,7 +20,7 @@ use Domain\ValueRepository;
 use React\Promise\PromiseInterface;
 
 /**
- * Class DeleteValueHandler
+ * Class DeleteValueHandler.
  */
 final class DeleteValueHandler
 {
@@ -28,15 +41,14 @@ final class DeleteValueHandler
         $this->valueRepository = $valueRepository;
     }
 
-
     /**
-     * Handle DeleteValue
+     * Handle DeleteValue.
      *
      * @param DeleteValue $deleteValue
      *
      * @return PromiseInterface
      */
-    public function handle(DeleteValue $deleteValue) : PromiseInterface
+    public function handle(DeleteValue $deleteValue): PromiseInterface
     {
         return $this
             ->valueRepository

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo.
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 /**
- * Class ViewValuesController
+ * Class ViewValuesController.
  */
 class ViewValuesController
 {
@@ -35,20 +35,19 @@ class ViewValuesController
     /**
      * DeleteValueController constructor.
      *
-     * @param QueryBus $queryBus
+     * @param QueryBus    $queryBus
      * @param Environment $twig
      */
     public function __construct(
         QueryBus $queryBus,
         Environment $twig
-    )
-    {
+    ) {
         $this->queryBus = $queryBus;
         $this->twig = $twig;
     }
 
     /**
-     * Invoke
+     * Invoke.
      *
      * @param Request $request
      *
@@ -58,11 +57,11 @@ class ViewValuesController
     {
         return $this
             ->queryBus
-            ->ask(new GetValues)
-            ->then(function(array $values) {
+            ->ask(new GetValues())
+            ->then(function (array $values) {
                 $template = $this->twig->load('redis/view_values.twig');
                 $value = $template->render([
-                    'values' => $values
+                    'values' => $values,
                 ]);
 
                 return new Response(

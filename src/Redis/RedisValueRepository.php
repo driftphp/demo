@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,7 +20,7 @@ use Domain\ValueRepository;
 use React\Promise\PromiseInterface;
 
 /**
- * Class RedisValueRepository
+ * Class RedisValueRepository.
  */
 class RedisValueRepository implements ValueRepository
 {
@@ -49,7 +49,7 @@ class RedisValueRepository implements ValueRepository
     }
 
     /**
-     * Set value given a key and a value
+     * Set value given a key and a value.
      *
      * @param string $key
      * @param string $value
@@ -64,7 +64,7 @@ class RedisValueRepository implements ValueRepository
     }
 
     /**
-     * Get value given a key
+     * Get value given a key.
      *
      * @param string $key
      *
@@ -78,30 +78,29 @@ class RedisValueRepository implements ValueRepository
     }
 
     /**
-     * Get all keys and values
+     * Get all keys and values.
      *
      * @return PromiseInterface
      */
-    public function getAll() : PromiseInterface
+    public function getAll(): PromiseInterface
     {
         return $this
             ->client
             ->hgetall(self::HASH)
-            ->then(function(array $values) {
-
+            ->then(function (array $values) {
                 return array_combine(
-                    array_filter($values, function(int $key) {
-                        return $key % 2 === 0;
+                    array_filter($values, function (int $key) {
+                        return 0 === $key % 2;
                     }, ARRAY_FILTER_USE_KEY),
-                    array_filter($values, function(int $key) {
-                        return $key % 2 === 1;
+                    array_filter($values, function (int $key) {
+                        return 1 === $key % 2;
                     }, ARRAY_FILTER_USE_KEY)
                 );
             });
     }
 
     /**
-     * Delete value given a key
+     * Delete value given a key.
      *
      * @param string $key
      *

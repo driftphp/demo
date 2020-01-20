@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo.
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PutValueController
+ * Class PutValueController.
  */
 class PutValueController
 {
@@ -43,7 +43,7 @@ class PutValueController
     }
 
     /**
-     * Invoke
+     * Invoke.
      *
      * @param Request $request
      *
@@ -51,7 +51,6 @@ class PutValueController
      */
     public function __invoke(Request $request)
     {
-
         $key = $request
             ->attributes
             ->get('key');
@@ -67,12 +66,12 @@ class PutValueController
         return $this
             ->commandBus
             ->execute(new PutValue($key, $value))
-            ->then(function() use ($key, $value) {
+            ->then(function () use ($key, $value) {
                 return new JsonResponse(
                     [
                         'key' => $key,
                         'value' => $value,
-                        'message' => 'Accepted'
+                        'message' => 'Accepted',
                     ],
                     202
                 );

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo.
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,12 +18,12 @@ namespace Domain;
 use React\Promise\PromiseInterface;
 
 /**
- * Class ValueRepository
+ * Class ValueRepository.
  */
 interface ValueRepository
 {
     /**
-     * Set value given a key and a value
+     * Set value given a key and a value.
      *
      * @param string $key
      * @param string $value
@@ -33,30 +33,30 @@ interface ValueRepository
     public function set(
         string $key,
         string $value
-    ) : PromiseInterface;
+    ): PromiseInterface;
 
     /**
-     * Get value given a key
+     * Get value given a key.
      *
      * @param string $key
      *
      * @return PromiseInterface
      */
-    public function get(string $key) : PromiseInterface;
+    public function get(string $key): PromiseInterface;
 
     /**
-     * Get all keys and values
+     * Get all keys and values.
      *
      * @return PromiseInterface
      */
-    public function getAll() : PromiseInterface;
+    public function getAll(): PromiseInterface;
 
     /**
-     * Delete value given a key
+     * Delete value given a key.
      *
      * @param string $key
      *
      * @return PromiseInterface
      */
-    public function delete(string $key) : PromiseInterface;
+    public function delete(string $key): PromiseInterface;
 }

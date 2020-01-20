@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo.
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class DeleteValueController
+ * Class DeleteValueController.
  */
 class DeleteValueController
 {
@@ -42,7 +42,7 @@ class DeleteValueController
     }
 
     /**
-     * Invoke
+     * Invoke.
      *
      * @param Request $request
      *
@@ -57,7 +57,7 @@ class DeleteValueController
         return $this
             ->commandBus
             ->execute(new DeleteValue($key))
-            ->then(function() use ($key) {
+            ->then(function () use ($key) {
                 return new JsonResponse(
                     [
                         'key' => $key,

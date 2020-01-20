@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DriftPHP Demo.
+ * This file is part of the DriftPHP Project
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class GetValueController
+ * Class GetValueController.
  */
 class GetValueController
 {
@@ -43,7 +43,7 @@ class GetValueController
     }
 
     /**
-     * Invoke
+     * Invoke.
      *
      * @param Request $request
      *
@@ -58,10 +58,9 @@ class GetValueController
         return $this
             ->queryBus
             ->ask(new GetValue($key))
-            ->then(function($value) use ($key) {
-
+            ->then(function ($value) use ($key) {
                 return is_string($value)
-                    ?  new JsonResponse(
+                    ? new JsonResponse(
                         [
                             'key' => $key,
                             'value' => $value,

@@ -4,12 +4,12 @@ services:
 
   redis:
     image: "redis:alpine"
-    container_name: redis
+    container_name: demo_redis
     networks: [main]
 
   amqp:
     image: "rabbitmq:3"
-    container_name: amqp
+    container_name: demo_amqp
     networks: [main]
 
   server:
