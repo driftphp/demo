@@ -37,6 +37,8 @@ sounds. We will use Twig as well to render some small templates with some of
 this stored information.
 
 ```yml
+/ GET
+/{key} GET
 /values/{key} GET
 /values/{key} PUT
 /values/{key} DELETE
