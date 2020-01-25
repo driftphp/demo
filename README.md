@@ -89,15 +89,13 @@ installed in `127.0.0.1:8000`
 ```bash
 curl -i -XGET localhost:8000/values/mykey
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 cache-control: no-cache, private
-date: Thu, 09 May 2019 18:39:56 GMT
-content-type: application/json
+date: Sat, 25 Jan 2020 17:23:33 GMT
+content-type: text/html; charset=UTF-8
 X-Powered-By: React/alpha
-Content-Length: 26
+Content-Length: 0
 Connection: close
-
-{"key":"key","value":null}
 ```
 
 * Put new value under a new key (Server response time: **~500μs**)
