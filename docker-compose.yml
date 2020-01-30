@@ -17,13 +17,13 @@ services:
     ports:
       - "8000:8000"
     networks: [main]
-    command: ["sh", "/wait-and-run.sh", "/server.sh"]
+    command: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: .env
 
   command-consumer:
     build: .
     networks: [main]
-    command: ["sh", "/wait-and-run.sh", "/command-consumer.sh"]
+    command: ["sh", "/wait-and-run.sh", "/command-consumer-entrypoint.sh"]
     env_file: .env
 
 networks:

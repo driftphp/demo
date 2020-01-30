@@ -1,12 +1,12 @@
 FROM driftphp/base
 
+WORKDIR /var/www
+
 #
 # Apisearch installation
 #
-RUN mkdir /var/www/demo
-COPY . /var/www/demo
-RUN cd /var/www/demo && \
-    composer install -n --prefer-dist --no-dev --no-suggest && \
+COPY . .
+RUN composer install -n --prefer-dist --no-dev --no-suggest && \
     composer dump-autoload -n --no-dev --optimize
 
 COPY docker/* /
