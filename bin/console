@@ -43,6 +43,4 @@ $kernel
      ->set('reactphp.event_loop', EventLoopFactory::create());
 
 $application = new Application($kernel);
-$application->add(new \Drift\Server\Console\RunServerCommand($bootstrapPath, 'server:run'));
-$application->add(new \Drift\Server\Console\WatchServerCommand($bootstrapPath, $argv, 'server:watch'));
 $application->run($input);
