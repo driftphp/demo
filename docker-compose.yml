@@ -6,11 +6,16 @@ services:
     image: "redis:alpine"
     container_name: demo_redis
     networks: [main]
+    ports:
+      - "6379:6379"
 
   amqp:
     image: "rabbitmq:3"
     container_name: demo_amqp
     networks: [main]
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   server:
     build: .
