@@ -16,7 +16,7 @@ framework:
 #
 amqp:
     clients:
-        commands:
+        main:
             host: "%env(AMQP_HOST)%"
             port: 5672
             vhost: /
@@ -29,7 +29,7 @@ amqp:
 #
 redis:
     clients:
-        values:
+        main:
             host: "%env(REDIS_HOST)%"
 
 
@@ -39,9 +39,19 @@ redis:
 command_bus:
     command_bus:
         async_adapter:
+            adapter: amqp
             amqp:
-                client: commands
+                client: main
                 queue: "%env(AMQP_COMMANDS_QUEUE)%"
+
+event_bus:
+    exchanges:
+        events: "%env(AMQP_EVENTS_EXCHANGE)%"
+    async_adapter:
+        adapter: amqp
+        pass_through: false
+        amqp:
+            client: main
 
 
 #
@@ -83,6 +93,9 @@ services:
         resource: "%app.path%/src/Domain/CommandHandler"
         tags: ['command_handler']
 
+    Domain\EventListener\:
+        resource: "%app.path%/src/Domain/EventListener"
+
 
     # Infrastructure classes are defined under \Infrastructure namespace. You
     # can find the alias in composer.json under the PSR-4 section. Autowiring is
@@ -90,6 +103,8 @@ services:
     # Feel free to comment the unused adapter for performance increasing.
     Infrastructure\Redis\:
         resource: "%app.path%/src/Redis"
+        tags:
+            - {name: preload, method: loadAll}
 
     Domain\ValueRepository:
         alias: Infrastructure\Redis\RedisValueRepository

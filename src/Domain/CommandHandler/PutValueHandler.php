@@ -16,7 +16,9 @@ declare(strict_types=1);
 namespace Domain\CommandHandler;
 
 use Domain\Command\PutValue;
+use Domain\Event\ValueHasBeenPut;
 use Domain\ValueRepository;
+use Drift\EventBus\Bus\EventBus;
 use React\Promise\PromiseInterface;
 
 /**
@@ -26,19 +28,26 @@ final class PutValueHandler
 {
     /**
      * @var ValueRepository
-     *
-     * Value Repository
      */
     private $valueRepository;
 
     /**
-     * PutValueController constructor.
+     * @var EventBus
+     */
+    private $eventBus;
+
+    /**
+     * DeleteValueHandler constructor.
      *
      * @param ValueRepository $valueRepository
+     * @param EventBus        $eventBus
      */
-    public function __construct(ValueRepository $valueRepository)
-    {
+    public function __construct(
+        ValueRepository $valueRepository,
+        EventBus $eventBus
+    ) {
         $this->valueRepository = $valueRepository;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -50,8 +59,19 @@ final class PutValueHandler
      */
     public function handle(PutValue $putValue): PromiseInterface
     {
+        $key = $putValue->getKey();
+        $value = $putValue->getValue();
+
         return $this
             ->valueRepository
-            ->set($putValue->getKey(), $putValue->getValue());
+            ->set($key, $value)
+            ->then(function () use ($key, $value) {
+                return $this
+                    ->eventBus
+                    ->dispatch(new ValueHasBeenPut(
+                        $key,
+                        $value
+                    ));
+            });
     }
 }

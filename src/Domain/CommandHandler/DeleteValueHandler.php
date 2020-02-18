@@ -16,7 +16,9 @@ declare(strict_types=1);
 namespace Domain\CommandHandler;
 
 use Domain\Command\DeleteValue;
+use Domain\Event\ValueHasBeenDeleted;
 use Domain\ValueRepository;
+use Drift\EventBus\Bus\EventBus;
 use React\Promise\PromiseInterface;
 
 /**
@@ -26,19 +28,26 @@ final class DeleteValueHandler
 {
     /**
      * @var ValueRepository
-     *
-     * Value Repository
      */
     private $valueRepository;
 
     /**
-     * PutValueController constructor.
+     * @var EventBus
+     */
+    private $eventBus;
+
+    /**
+     * DeleteValueHandler constructor.
      *
      * @param ValueRepository $valueRepository
+     * @param EventBus        $eventBus
      */
-    public function __construct(ValueRepository $valueRepository)
-    {
+    public function __construct(
+        ValueRepository $valueRepository,
+        EventBus $eventBus
+    ) {
         $this->valueRepository = $valueRepository;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -50,8 +59,15 @@ final class DeleteValueHandler
      */
     public function handle(DeleteValue $deleteValue): PromiseInterface
     {
+        $key = $deleteValue->getKey();
+
         return $this
             ->valueRepository
-            ->delete($deleteValue->getKey());
+            ->delete($key)
+            ->then(function () use ($key) {
+                return $this
+                    ->eventBus
+                    ->dispatch(new ValueHasBeenDeleted($key));
+            });
     }
 }

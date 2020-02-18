@@ -23,6 +23,24 @@ use React\Promise\PromiseInterface;
 interface ValueRepository
 {
     /**
+     * Get value given a key.
+     *
+     * @param string $key
+     *
+     * @return string
+     *
+     * @throws KeyNotFoundException
+     */
+    public function get(string $key): ?string;
+
+    /**
+     * Get all keys and values.
+     *
+     * @return array
+     */
+    public function getAll(): array;
+
+    /**
      * Set value given a key and a value.
      *
      * @param string $key
@@ -36,22 +54,6 @@ interface ValueRepository
     ): PromiseInterface;
 
     /**
-     * Get value given a key.
-     *
-     * @param string $key
-     *
-     * @return PromiseInterface
-     */
-    public function get(string $key): PromiseInterface;
-
-    /**
-     * Get all keys and values.
-     *
-     * @return PromiseInterface
-     */
-    public function getAll(): PromiseInterface;
-
-    /**
      * Delete value given a key.
      *
      * @param string $key
@@ -59,4 +61,11 @@ interface ValueRepository
      * @return PromiseInterface
      */
     public function delete(string $key): PromiseInterface;
+
+    /**
+     * Load locally.
+     *
+     * @return PromiseInterface
+     */
+    public function loadAll(): PromiseInterface;
 }

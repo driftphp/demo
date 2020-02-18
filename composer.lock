@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e23fbefe314498756d0ff600ed3ef95a",
+    "content-hash": "a76c1cafe7a252db4fbf1d5189fa4595",
     "packages": [
         {
             "name": "alecrabbit/php-cli-snake",
@@ -623,6 +623,57 @@
             "time": "2019-12-30T19:58:08+00:00"
         },
         {
+            "name": "drift/event-bus-bundle",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/driftphp/event-bus-bundle.git",
+                "reference": "fa9204020a50075d2b95b1b9f2003d0fdeaf4098"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/driftphp/event-bus-bundle/zipball/fa9204020a50075d2b95b1b9f2003d0fdeaf4098",
+                "reference": "fa9204020a50075d2b95b1b9f2003d0fdeaf4098",
+                "shasum": ""
+            },
+            "require": {
+                "clue/block-react": "^1.3",
+                "drift/console-bridge": "0.1.*",
+                "drift/http-kernel": "0.1.*, >=0.1.7",
+                "mmoreram/base-bundle": "^2.1.2",
+                "php": "^7.3",
+                "symfony/console": "^5.0.0",
+                "symfony/dependency-injection": "^5.0.0",
+                "symfony/proxy-manager-bridge": "^5.0.0"
+            },
+            "require-dev": {
+                "drift/amqp-bundle": "0.1.*, >=0.1.1",
+                "symfony/process": "^5.0.0"
+            },
+            "suggest": {
+                "drift/amqp-bundle": "Install this bundle to use AMQP as a queue system"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Drift\\EventBus\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "description": "Event Bus for DriftPHP, a framework on top of Symfony and ReactPHP components",
+            "homepage": "https://github.com/driftphp/event-bus-bundle",
+            "time": "2020-02-18T09:04:46+00:00"
+        },
+        {
             "name": "drift/http-kernel",
             "version": "0.1.7",
             "source": {
@@ -672,6 +723,52 @@
             ],
             "description": "Http Kernel component for Drift, based on Symfony Http Kernel component",
             "time": "2020-02-17T17:24:56+00:00"
+        },
+        {
+            "name": "drift/postgresql-bundle",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/driftphp/postgresql-bundle.git",
+                "reference": "b2ef1d7d7d4c55261db43b2a411365e70c2c3704"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/driftphp/postgresql-bundle/zipball/b2ef1d7d7d4c55261db43b2a411365e70c2c3704",
+                "reference": "b2ef1d7d7d4c55261db43b2a411365e70c2c3704",
+                "shasum": ""
+            },
+            "require": {
+                "drift/http-kernel": "0.1.*",
+                "mmoreram/base-bundle": "^2.1",
+                "php": "^7.3",
+                "voryx/pgasync": "^2.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Drift\\Postgresql\\": "."
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Zhuk",
+                    "email": "seregazhuk88@gmail.com"
+                },
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "description": "Postgresql Bundle for DriftPHP, a framework on top of Symfony and ReactPHP components",
+            "time": "2020-02-11T16:37:05+00:00"
         },
         {
             "name": "drift/preload-bundle",
@@ -2211,6 +2308,71 @@
                 "writable"
             ],
             "time": "2019-01-01T16:15:09+00:00"
+        },
+        {
+            "name": "reactivex/rxphp",
+            "version": "2.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ReactiveX/RxPHP.git",
+                "reference": "fd74a0cd2b5edd4a48e4ff12aaa44cc6cdc4a9b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ReactiveX/RxPHP/zipball/fd74a0cd2b5edd4a48e4ff12aaa44cc6cdc4a9b4",
+                "reference": "fd74a0cd2b5edd4a48e4ff12aaa44cc6cdc4a9b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.0",
+                "react/promise": "~2.2"
+            },
+            "require-dev": {
+                "phpunit/phpcov": "^3.1",
+                "phpunit/phpunit": "^5.7",
+                "react/event-loop": "^1.0 || ^0.5 || ^0.4.2",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "suggest": {
+                "react/event-loop": "Used for scheduling async operations"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rx\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                },
+                {
+                    "name": "David Dan",
+                    "email": "davidwdan@gmail.com"
+                },
+                {
+                    "name": "Matt Bonneau",
+                    "email": "matt@bonneau.net"
+                }
+            ],
+            "description": "Reactive extensions for php.",
+            "homepage": "https://github.com/ReactiveX/RxPHP",
+            "keywords": [
+                "extensions",
+                "reactive",
+                "rx"
+            ],
+            "time": "2018-04-18T01:34:36+00:00"
         },
         {
             "name": "ringcentral/psr7",
@@ -4354,6 +4516,121 @@
                 "templating"
             ],
             "time": "2020-02-11T15:33:47+00:00"
+        },
+        {
+            "name": "voryx/event-loop",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voryx/event-loop.git",
+                "reference": "ed7ee6236945b64591f8ef2be855e6244f1439e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voryx/event-loop/zipball/ed7ee6236945b64591f8ef2be855e6244f1439e6",
+                "reference": "ed7ee6236945b64591f8ef2be855e6244f1439e6",
+                "shasum": ""
+            },
+            "require": {
+                "react/event-loop": "^1.0 || ^0.5 || ^0.4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EventLoop\\": "src"
+                },
+                "files": [
+                    "src/functions.php",
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Bonneau",
+                    "email": "matt@bonneau.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "David Dan",
+                    "email": "davidwdan@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Global static wrapper for react event-loop",
+            "keywords": [
+                "event-loop",
+                "eventloop",
+                "global",
+                "static",
+                "timer"
+            ],
+            "time": "2018-04-18T00:07:06+00:00"
+        },
+        {
+            "name": "voryx/pgasync",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voryx/PgAsync.git",
+                "reference": "61658fed8c897c3c9ba218847851c3b6afa224a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voryx/PgAsync/zipball/61658fed8c897c3c9ba218847851c3b6afa224a5",
+                "reference": "61658fed8c897c3c9ba218847851c3b6afa224a5",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "^2.0 | ^3.0",
+                "react/socket": "^1.0 || ^0.8 || ^0.7",
+                "reactivex/rxphp": "^2.0",
+                "voryx/event-loop": "^3.0 || ^2.0.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "react/dns": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PgAsync\\": "src/PgAsync/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Bonneau",
+                    "email": "matt@bonneau.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "David Dan",
+                    "email": "davidwdan@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Async Reactive Postgres Driver for PHP (Non-blocking)",
+            "keywords": [
+                "async",
+                "driver",
+                "pgsql",
+                "postgres",
+                "postgresql",
+                "react",
+                "reactive",
+                "rx.php"
+            ],
+            "time": "2019-08-19T20:34:34+00:00"
         },
         {
             "name": "webimpress/safe-writer",

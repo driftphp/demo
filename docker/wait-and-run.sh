@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 
 while ! nc -z demo_redis 6379;

@@ -17,18 +17,38 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-  server:
-    build: .
+  tiny_balancer:
+    image: "driftphp/tiny-balancer"
     ports:
       - "8000:8000"
     networks: [main]
-    command: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
+    entrypoint: ["php", "balancer.php", "8000", "server_1:8000", "server_2:8000", "server_3:8000"]
+
+  server_1:
+    build: .
+    networks: [main]
+    container_name: server_1
+    entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
+    env_file: .env
+
+  server_2:
+    build: .
+    networks: [main]
+    container_name: server_2
+    entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
+    env_file: .env
+
+  server_3:
+    build: .
+    networks: [main]
+    container_name: server_3
+    entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: .env
 
   command-consumer:
     build: .
     networks: [main]
-    command: ["sh", "/wait-and-run.sh", "/command-consumer-entrypoint.sh"]
+    entrypoint: ["sh", "/wait-and-run.sh", "/command-consumer-entrypoint.sh"]
     env_file: .env
 
 networks:
