@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 while ! nc -z demo_redis 6379;
 do
   echo "Waiting REDIS. Slepping";

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8a46c770402d64b1cfd31fb30dee1de",
+    "content-hash": "e23fbefe314498756d0ff600ed3ef95a",
     "packages": [
         {
             "name": "alecrabbit/php-cli-snake",
@@ -532,34 +532,37 @@
         },
         {
             "name": "drift/command-bus-bundle",
-            "version": "0.1.5",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driftphp/command-bus-bundle.git",
-                "reference": "b2a32482e104dbef03a3673e1af9ae42862a8ca2"
+                "reference": "444b6d25176bd89655730a6501bdbbf100ebadfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driftphp/command-bus-bundle/zipball/b2a32482e104dbef03a3673e1af9ae42862a8ca2",
-                "reference": "b2a32482e104dbef03a3673e1af9ae42862a8ca2",
+                "url": "https://api.github.com/repos/driftphp/command-bus-bundle/zipball/444b6d25176bd89655730a6501bdbbf100ebadfe",
+                "reference": "444b6d25176bd89655730a6501bdbbf100ebadfe",
                 "shasum": ""
             },
             "require": {
                 "clue/block-react": "^1.3",
                 "drift/console-bridge": "0.1.*",
                 "drift/http-kernel": "0.1.*, >=0.1.5",
-                "mmoreram/base-bundle": "^2.1",
+                "mmoreram/base-bundle": "^2.1.2",
                 "php": "^7.3",
                 "symfony/console": "^5.0.0",
                 "symfony/dependency-injection": "^5.0.0",
+                "symfony/process": "^5.0.0",
                 "symfony/proxy-manager-bridge": "^5.0.0"
             },
             "require-dev": {
                 "drift/amqp-bundle": "0.1.*, >=0.1.1",
+                "drift/postgresql-bundle": "0.1.*, >=0.1.1",
                 "drift/redis-bundle": "0.1.*, >=0.1.2"
             },
             "suggest": {
                 "drift/amqp-bundle": "Install this bundle to use AMQP as a queue system",
+                "drift/postgresql-bundle": "Install this bundle to use PostgreSQL as a queue system",
                 "drift/redis-bundle": "Install this bundle to use Redis as a queue system"
             },
             "type": "library",
@@ -580,7 +583,7 @@
             ],
             "description": "Bus Bundle for DriftPHP, a framework on top of Symfony and ReactPHP components",
             "homepage": "https://github.com/driftphp/command-bus-bundle",
-            "time": "2020-02-04T17:38:47+00:00"
+            "time": "2020-02-11T16:43:01+00:00"
         },
         {
             "name": "drift/console-bridge",
@@ -621,22 +624,23 @@
         },
         {
             "name": "drift/http-kernel",
-            "version": "0.1.5",
+            "version": "0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driftphp/http-kernel.git",
-                "reference": "1a63fccfd0a8804b6bdd36d70b69790659dae777"
+                "reference": "83d39b0c5af3219c3bbf1899d89f051f76f9547a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driftphp/http-kernel/zipball/1a63fccfd0a8804b6bdd36d70b69790659dae777",
-                "reference": "1a63fccfd0a8804b6bdd36d70b69790659dae777",
+                "url": "https://api.github.com/repos/driftphp/http-kernel/zipball/83d39b0c5af3219c3bbf1899d89f051f76f9547a",
+                "reference": "83d39b0c5af3219c3bbf1899d89f051f76f9547a",
                 "shasum": ""
             },
             "require": {
                 "clue/block-react": "^1.3",
                 "php": "^7.3",
                 "react/filesystem": "^0.1",
+                "react/http": "^0.8",
                 "react/promise": "^2.7",
                 "symfony/dependency-injection": "^5.0",
                 "symfony/event-dispatcher-contracts": "^2.0",
@@ -667,7 +671,7 @@
                 }
             ],
             "description": "Http Kernel component for Drift, based on Symfony Http Kernel component",
-            "time": "2019-12-27T17:08:54+00:00"
+            "time": "2020-02-17T17:24:56+00:00"
         },
         {
             "name": "drift/preload-bundle",
@@ -809,16 +813,16 @@
         },
         {
             "name": "drift/server",
-            "version": "0.1.4",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driftphp/server.git",
-                "reference": "4c566b6be781ebaf5c15933f5e2d1fed5f12a96d"
+                "reference": "cd9185cba86a72ca51bffd46a44335fab907f3f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driftphp/server/zipball/4c566b6be781ebaf5c15933f5e2d1fed5f12a96d",
-                "reference": "4c566b6be781ebaf5c15933f5e2d1fed5f12a96d",
+                "url": "https://api.github.com/repos/driftphp/server/zipball/cd9185cba86a72ca51bffd46a44335fab907f3f6",
+                "reference": "cd9185cba86a72ca51bffd46a44335fab907f3f6",
                 "shasum": ""
             },
             "require": {
@@ -838,6 +842,7 @@
                 "symfony/http-kernel": "^5.0"
             },
             "require-dev": {
+                "drift/event-bus-bundle": "0.1.*, >=0.1.2",
                 "ext-fileinfo": "*",
                 "symfony/config": "^5.0",
                 "symfony/framework-bundle": "^5.0",
@@ -863,7 +868,7 @@
                 }
             ],
             "description": "ReactPHP based server for DriftPHP",
-            "time": "2019-12-31T09:40:18+00:00"
+            "time": "2020-02-19T08:04:06+00:00"
         },
         {
             "name": "drift/twig-bundle",
@@ -1177,19 +1182,20 @@
         },
         {
             "name": "mmoreram/base-bundle",
-            "version": "2.1.0",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mmoreram/BaseBundle.git",
-                "reference": "0ac3cc5a64b3e80c2e75ecbc86d36b2b0608b867"
+                "reference": "3de52ac4b75d89be47ee9479f593f37f46dec8b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mmoreram/BaseBundle/zipball/0ac3cc5a64b3e80c2e75ecbc86d36b2b0608b867",
-                "reference": "0ac3cc5a64b3e80c2e75ecbc86d36b2b0608b867",
+                "url": "https://api.github.com/repos/mmoreram/BaseBundle/zipball/3de52ac4b75d89be47ee9479f593f37f46dec8b7",
+                "reference": "3de52ac4b75d89be47ee9479f593f37f46dec8b7",
                 "shasum": ""
             },
             "require": {
+                "mmoreram/symfony-bundle-dependencies": "^2.2",
                 "php": ">=7.2",
                 "symfony/framework-bundle": "^4.3|^5.0",
                 "symfony/yaml": "^4.3|^5.0"
@@ -1198,7 +1204,8 @@
                 "symfony/browser-kit": "^4.3|^5.0",
                 "symfony/config": "^4.3|^5.0",
                 "symfony/console": "^4.3|^5.0",
-                "symfony/http-kernel": "^4.3|^5.0"
+                "symfony/http-kernel": "^4.3|^5.0",
+                "symfony/process": "^4.3|^5.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -1224,7 +1231,55 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-12-17T09:01:07+00:00"
+            "time": "2020-02-11T12:49:57+00:00"
+        },
+        {
+            "name": "mmoreram/symfony-bundle-dependencies",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmoreram/symfony-bundle-dependencies.git",
+                "reference": "077fc6ffc319e46c4fa2e763bb23a3e1b851fe26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmoreram/symfony-bundle-dependencies/zipball/077fc6ffc319e46c4fa2e763bb23a3e1b851fe26",
+                "reference": "077fc6ffc319e46c4fa2e763bb23a3e1b851fe26",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "symfony/http-kernel": "^3.2|^4.0|^5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "mmoreram/php-formatter": "^1.3.1",
+                "phpunit/phpunit": "^5.6.4",
+                "symfony/dependency-injection": "^3.2|^4.0|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mmoreram\\SymfonyBundleDependencies\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "description": "Dependencies resolver for Symfony Bundles",
+            "keywords": [
+                "bundle",
+                "dependencies",
+                "symfony"
+            ],
+            "time": "2019-11-12T08:19:36+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -1279,16 +1334,16 @@
         },
         {
             "name": "ocramius/proxy-manager",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/ProxyManager.git",
-                "reference": "dec37bfb3c3594440ee4fa263494189344787d22"
+                "reference": "e77928e8f11ea36b388f87e75c993d05f5da6bf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/dec37bfb3c3594440ee4fa263494189344787d22",
-                "reference": "dec37bfb3c3594440ee4fa263494189344787d22",
+                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/e77928e8f11ea36b388f87e75c993d05f5da6bf1",
+                "reference": "e77928e8f11ea36b388f87e75c993d05f5da6bf1",
                 "shasum": ""
             },
             "require": {
@@ -1306,14 +1361,12 @@
                 "doctrine/coding-standard": "^6.0.0",
                 "ext-phar": "*",
                 "infection/infection": "^0.15.0",
-                "mikey179/vfsstream": "^1.6.8",
                 "nikic/php-parser": "^4.3.0",
-                "phpbench/phpbench": "^0.16.10",
-                "phpunit/phpunit": "^8.5.1",
+                "phpbench/phpbench": "^0.17.0",
+                "phpunit/phpunit": "^8.5.2",
                 "slevomat/coding-standard": "^5.0.4",
-                "squizlabs/php_codesniffer": "^3.5.3",
-                "symfony/console": "^4.4.2",
-                "vimeo/psalm": "3.7.0"
+                "squizlabs/php_codesniffer": "^3.5.4",
+                "vimeo/psalm": "^3.8.5"
             },
             "suggest": {
                 "laminas/laminas-json": "To have the JsonRpc adapter (Remote Object feature)",
@@ -1352,7 +1405,7 @@
                 "proxy pattern",
                 "service proxies"
             ],
-            "time": "2020-01-27T09:25:51+00:00"
+            "time": "2020-02-08T19:22:03+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3375,16 +3428,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
                 "shasum": ""
             },
             "require": {
@@ -3396,7 +3449,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -3429,26 +3482,26 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-11-27T13:56:44+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46"
+                "reference": "6842f1a39cf7d580655688069a03dd7cd83d244a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
-                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6842f1a39cf7d580655688069a03dd7cd83d244a",
+                "reference": "6842f1a39cf7d580655688069a03dd7cd83d244a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "symfony/polyfill-mbstring": "^1.3",
-                "symfony/polyfill-php72": "^1.9"
+                "symfony/polyfill-php72": "^1.10"
             },
             "suggest": {
                 "ext-intl": "For best performance"
@@ -3456,7 +3509,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -3491,20 +3544,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T13:56:44+00:00"
+            "time": "2020-01-17T12:01:36+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/34094cfa9abe1f0f14f48f490772db7a775559f2",
+                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2",
                 "shasum": ""
             },
             "require": {
@@ -3516,7 +3569,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -3550,20 +3603,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T14:18:11+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038"
+                "reference": "46ecacf4751dd0dc81e4f6bf01dbf9da1dc1dadf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/66fea50f6cb37a35eea048d75a7d99a45b586038",
-                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/46ecacf4751dd0dc81e4f6bf01dbf9da1dc1dadf",
+                "reference": "46ecacf4751dd0dc81e4f6bf01dbf9da1dc1dadf",
                 "shasum": ""
             },
             "require": {
@@ -3572,7 +3625,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -3605,20 +3658,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T13:56:44+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f"
+                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/4b0e2222c55a25b4541305a053013d5647d3a25f",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/5e66a0fa1070bf46bec4bea7962d285108edd675",
+                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675",
                 "shasum": ""
             },
             "require": {
@@ -3627,7 +3680,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -3663,7 +3716,56 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T16:25:15+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v5.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "f9ffd870f5ac01abec7b2b5e15f904ca9400ecd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/f9ffd870f5ac01abec7b2b5e15f904ca9400ecd1",
+                "reference": "f9ffd870f5ac01abec7b2b5e15f904ca9400ecd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-01-09T09:53:06+00:00"
         },
         {
             "name": "symfony/proxy-manager-bridge",
@@ -4193,16 +4295,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.0.1",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "28f856a4c57eeb24485916e8a68403f41a133616"
+                "reference": "3b88ccd180a6b61ebb517aea3b1a8906762a1dc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/28f856a4c57eeb24485916e8a68403f41a133616",
-                "reference": "28f856a4c57eeb24485916e8a68403f41a133616",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3b88ccd180a6b61ebb517aea3b1a8906762a1dc2",
+                "reference": "3b88ccd180a6b61ebb517aea3b1a8906762a1dc2",
                 "shasum": ""
             },
             "require": {
@@ -4251,7 +4353,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-12-28T07:17:28+00:00"
+            "time": "2020-02-11T15:33:47+00:00"
         },
         {
             "name": "webimpress/safe-writer",
