@@ -3,7 +3,6 @@
 
 use Drift\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Console;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 use React\EventLoop\Factory as EventLoopFactory;

@@ -17,7 +17,6 @@ namespace Domain\QueryHandler;
 
 use Domain\Query\GetValues;
 use Domain\ValueRepository;
-use React\Promise\PromiseInterface;
 
 /**
  * Class GetValuesHandler.
@@ -46,9 +45,9 @@ final class GetValuesHandler
      *
      * @param GetValues $getValues
      *
-     * @return PromiseInterface
+     * @return array
      */
-    public function handle(GetValues $getValues): PromiseInterface
+    public function handle(GetValues $getValues): array
     {
         return $this
             ->valueRepository

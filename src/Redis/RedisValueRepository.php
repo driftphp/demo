@@ -16,13 +16,14 @@ declare(strict_types=1);
 namespace Infrastructure\Redis;
 
 use Clue\React\Redis\Client;
+use Domain\KeyNotFoundException;
 use Domain\ValueRepository;
 use React\Promise\PromiseInterface;
 
 /**
  * Class RedisValueRepository.
  */
-class RedisValueRepository implements ValueRepository
+final class RedisValueRepository implements ValueRepository
 {
     /**
      * @var Client
@@ -39,6 +40,11 @@ class RedisValueRepository implements ValueRepository
     private const HASH = 'demo';
 
     /**
+     * @var array
+     */
+    private $localValues = [];
+
+    /**
      * PutValueController constructor.
      *
      * @param Client $client
@@ -46,6 +52,34 @@ class RedisValueRepository implements ValueRepository
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Get value given a key.
+     *
+     * @param string $key
+     *
+     * @return string
+     *
+     * @throws KeyNotFoundException
+     */
+    public function get(string $key): string
+    {
+        if (!array_key_exists($key, $this->localValues)) {
+            throw new KeyNotFoundException(sprintf('Key % does not exist', $key));
+        }
+
+        return $this->localValues[$key];
+    }
+
+    /**
+     * Get all keys and values.
+     *
+     * @return array
+     */
+    public function getAll(): array
+    {
+        return $this->localValues;
     }
 
     /**
@@ -64,42 +98,6 @@ class RedisValueRepository implements ValueRepository
     }
 
     /**
-     * Get value given a key.
-     *
-     * @param string $key
-     *
-     * @return PromiseInterface
-     */
-    public function get(string $key): PromiseInterface
-    {
-        return $this
-            ->client
-            ->hget(self::HASH, $key);
-    }
-
-    /**
-     * Get all keys and values.
-     *
-     * @return PromiseInterface
-     */
-    public function getAll(): PromiseInterface
-    {
-        return $this
-            ->client
-            ->hgetall(self::HASH)
-            ->then(function (array $values) {
-                return array_combine(
-                    array_filter($values, function (int $key) {
-                        return 0 === $key % 2;
-                    }, ARRAY_FILTER_USE_KEY),
-                    array_filter($values, function (int $key) {
-                        return 1 === $key % 2;
-                    }, ARRAY_FILTER_USE_KEY)
-                );
-            });
-    }
-
-    /**
      * Delete value given a key.
      *
      * @param string $key
@@ -111,5 +109,27 @@ class RedisValueRepository implements ValueRepository
         return $this
             ->client
             ->hdel(self::HASH, $key);
+    }
+
+    /**
+     * Load locally.
+     *
+     * @return PromiseInterface
+     */
+    public function loadAll(): PromiseInterface
+    {
+        return $this
+            ->client
+            ->hgetall(self::HASH)
+            ->then(function (array $values) {
+                $this->localValues = array_combine(
+                    array_filter($values, function (int $key) {
+                        return 0 === $key % 2;
+                    }, ARRAY_FILTER_USE_KEY),
+                    array_filter($values, function (int $key) {
+                        return 1 === $key % 2;
+                    }, ARRAY_FILTER_USE_KEY)
+                );
+            });
     }
 }

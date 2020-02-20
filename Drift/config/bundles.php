@@ -16,6 +16,7 @@ declare(strict_types=1);
 return [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     Drift\CommandBus\CommandBusBundle::class => ['all' => true],
+    Drift\EventBus\EventBusBundle::class => ['all' => true],
     Drift\Redis\RedisBundle::class => ['all' => true],
     Drift\Twig\TwigBundle::class => ['all' => true],
     Drift\Preload\PreloadBundle::class => ['all' => true],

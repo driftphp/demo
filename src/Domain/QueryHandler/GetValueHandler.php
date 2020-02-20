@@ -18,7 +18,6 @@ namespace Domain\QueryHandler;
 use Domain\KeyNotFoundException;
 use Domain\Query\GetValue;
 use Domain\ValueRepository;
-use React\Promise\PromiseInterface;
 
 /**
  * Class GetValueHandler.
@@ -47,15 +46,19 @@ final class GetValueHandler
      *
      * @param GetValue $getValue
      *
-     * @return PromiseInterface
+     * @return string|null
      */
-    public function handle(GetValue $getValue): PromiseInterface
+    public function handle(GetValue $getValue): ?string
     {
-        return $this
-            ->valueRepository
-            ->get($getValue->getKey())
-            ->then(null, function (KeyNotFoundException $exception) {
-                return null;
-            });
+        $value = null;
+        try {
+            $value = $this
+                ->valueRepository
+                ->get($getValue->getKey());
+        } catch (KeyNotFoundException $exception) {
+            // Silent pass
+        }
+
+        return $value;
     }
 }

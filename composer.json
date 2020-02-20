@@ -23,10 +23,12 @@
         "drift/server": "0.1.*, >=0.1.6",
         "drift/react-functions": "0.1.*",
         "drift/command-bus-bundle": "0.1.*",
+        "drift/event-bus-bundle": "0.1.*",
         "drift/redis-bundle": "0.1.*",
         "drift/twig-bundle": "0.1.*",
         "drift/preload-bundle": "0.1.*",
         "drift/amqp-bundle": "0.1.*",
+        "drift/postgresql-bundle": "0.1.*",
 
         "symfony/thanks":  "*"
     },
