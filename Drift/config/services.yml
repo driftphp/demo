@@ -10,48 +10,41 @@ framework:
     php_errors:
         log: false
 
-
 #
-# AMQP Bundle configuration
+# DBAL configuration
 #
-amqp:
-    clients:
+dbal:
+    connections:
         main:
-            host: "%env(AMQP_HOST)%"
-            port: 5672
-            vhost: /
-            user: guest
-            password: guest
-
-
-#
-# Redis Bundle configuration
-#
-redis:
-    clients:
-        main:
-            host: "%env(REDIS_HOST)%"
-
+            driver: "%env(DBAL_DRIVER)%"
+            host: "%env(DBAL_HOST)%"
+            port: "%env(int:DBAL_PORT)%"
+            user: "%env(DBAL_USER)%"
+            password: "%env(DBAL_PASSWORD)%"
+            dbname: "%env(DBAL_DATABASE)%"
 
 #
-# Command Bus Bundle configuration
+# Command bus configuration
 #
 command_bus:
     command_bus:
         async_adapter:
             adapter: amqp
             amqp:
-                client: main
+                host: "%env(AMQP_HOST)%"
                 queue: "%env(AMQP_COMMANDS_QUEUE)%"
 
+#
+# Event bus configuration
+#
 event_bus:
     exchanges:
         events: "%env(AMQP_EVENTS_EXCHANGE)%"
+    async_pass_through: false
     async_adapter:
         adapter: amqp
-        pass_through: false
         amqp:
-            client: main
+            host: "%env(AMQP_HOST)%"
 
 
 #
@@ -66,13 +59,19 @@ preload:
         - "@drift"
         - "@react"
         - "Drift\\Twig\\Preset\\TwigPreset"
-        - "Drift\\Redis\\Preset\\RedisPreset"
+
+websocket:
+    routes:
+        events:
+            path: /events
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            string $websocketPort: "%env(WEBSOCKET_PORT)%"
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -101,10 +100,14 @@ services:
     # can find the alias in composer.json under the PSR-4 section. Autowiring is
     # used here to create all services, and final alias is generated after all.
     # Feel free to comment the unused adapter for performance increasing.
-    Infrastructure\Redis\:
-        resource: "%app.path%/src/Redis"
+    Infrastructure\DBAL\:
+        resource: "%app.path%/src/DBAL"
         tags:
             - {name: preload, method: loadAll}
 
     Domain\ValueRepository:
-        alias: Infrastructure\Redis\RedisValueRepository
+        alias: Infrastructure\DBAL\DBALValueRepository
+
+    # Websockets integration
+    App\Websocket\:
+        resource: "%app.path%/src/Websocket"

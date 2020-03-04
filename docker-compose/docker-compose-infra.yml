@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: "postgres:alpine"
+    container_name: demo_postgres
+    networks: [main]
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: demo
+    volumes:
+      - ./postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+    ports:
+      - "5432:5432"
+
+  amqp:
+    image: "rabbitmq:3-management"
+    container_name: demo_amqp
+    networks: [main]
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+networks:
+  main:

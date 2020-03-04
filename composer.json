@@ -1,5 +1,4 @@
 {
-    "name": "drift/skeleton",
     "description": "Small demo using DriftPHP skeleton and components",
     "type": "project",
     "license": "MIT",
@@ -19,18 +18,22 @@
         "symfony/stopwatch": "^5.0.0",
         "symfony/debug": "^4.4.0",
 
-        "drift/http-kernel": "0.1.*",
-        "drift/server": "0.1.*, >=0.1.6",
+        "drift/http-kernel": "0.1.*, >=0.1.7",
+        "drift/server": "0.1.*, >=0.1.7",
         "drift/react-functions": "0.1.*",
-        "drift/command-bus-bundle": "0.1.*",
-        "drift/event-bus-bundle": "0.1.*",
-        "drift/redis-bundle": "0.1.*",
-        "drift/twig-bundle": "0.1.*",
-        "drift/preload-bundle": "0.1.*",
-        "drift/amqp-bundle": "0.1.*",
-        "drift/postgresql-bundle": "0.1.*",
+        "drift/event-loop-utils": "0.1.*",
 
-        "symfony/thanks":  "*"
+        "drift/preload-bundle": "0.1.*",
+        "drift/command-bus-bundle": "0.1.*, >=0.1.8",
+        "drift/event-bus-bundle": "0.1.*, >=0.1.5",
+        "drift/websocket-bundle": "0.1.*, >=0.1.2",
+        "drift/twig-bundle": "0.1.*",
+        "drift/dbal-bundle": "0.1.*, >=0.1.2",
+
+        "drift/amqp-bundle": "0.1.*",
+        "voryx/pgasync": "^2.0.4",
+
+        "symfony/thanks":  "^1.2.5"
     },
 
     "autoload": {

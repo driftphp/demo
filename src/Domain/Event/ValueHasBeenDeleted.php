@@ -42,4 +42,17 @@ final class ValueHasBeenDeleted
     {
         return $this->key;
     }
+
+    /**
+     * To array
+     *
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return [
+            'event' => 'value_deleted',
+            'key' => $this->key,
+        ];
+    }
 }
