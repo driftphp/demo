@@ -22,7 +22,7 @@ services:
     ports:
       - "8000:8000"
     networks: [main]
-    entrypoint: ["php", "balancer.php", "8000", "server_1:8000", "server_2:8000", "server_3:8000"]
+    entrypoint: ["php", "balancer", "8000", "server_1:8000", "server_2:8000", "server_3:8000"]
 
   server_1:
     build: .
