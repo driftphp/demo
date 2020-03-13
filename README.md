@@ -259,5 +259,4 @@ As soon as our persistence layer changes, both lists will change (the first one
 by applying some deltas, the second by appending new domain events).
 
 You can open multiple times this endpoint at the same time and play with the
-concurrency. 
->>>>>>> New demo for DriftPHP
+concurrency.
