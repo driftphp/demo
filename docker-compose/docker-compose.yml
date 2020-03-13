@@ -2,15 +2,21 @@ version: '3'
 
 services:
 
-  redis:
-    image: "redis:alpine"
-    container_name: demo_redis
+  postgres:
+    image: "postgres:alpine"
+    container_name: demo_postgres
     networks: [main]
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: demo
+    volumes:
+      - ./postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
     ports:
-      - "6379:6379"
+      - "5432:5432"
 
   amqp:
-    image: "rabbitmq:3"
+    image: "rabbitmq:3-management"
     container_name: demo_amqp
     networks: [main]
     ports:
@@ -20,35 +26,43 @@ services:
   tiny_balancer:
     image: "driftphp/tiny-balancer"
     ports:
-      - "8000:8000"
+      - "${SERVER_PORT}:8000"
     networks: [main]
     entrypoint: ["php", "balancer", "8000", "server_1:8000", "server_2:8000", "server_3:8000"]
 
   server_1:
-    build: .
+    build: ..
     networks: [main]
     container_name: server_1
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: .env
 
   server_2:
-    build: .
+    build: ..
     networks: [main]
     container_name: server_2
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: .env
 
   server_3:
-    build: .
+    build: ..
     networks: [main]
     container_name: server_3
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: .env
 
-  command-consumer:
-    build: .
+  command_consumer:
+    build: ..
     networks: [main]
     entrypoint: ["sh", "/wait-and-run.sh", "/command-consumer-entrypoint.sh"]
+    env_file: .env
+
+  websocket:
+    build: ..
+    networks: [main]
+    entrypoint: ["sh", "/wait-and-run.sh", "/websocket-entrypoint.sh"]
+    ports:
+      - "${WEBSOCKET_PORT}:8000"
     env_file: .env
 
 networks:

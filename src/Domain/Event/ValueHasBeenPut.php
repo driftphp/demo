@@ -59,4 +59,18 @@ final class ValueHasBeenPut
     {
         return $this->value;
     }
+
+    /**
+     * To array
+     *
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return [
+            'event' => 'value_put',
+            'key' => $this->key,
+            'value' => $this->value
+        ];
+    }
 }

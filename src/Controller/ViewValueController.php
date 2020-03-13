@@ -68,6 +68,6 @@ class ViewValueController implements RenderableController
      */
     public static function getTemplatePath(): string
     {
-        return 'redis/view_value.twig';
+        return 'view_value.twig';
     }
 }

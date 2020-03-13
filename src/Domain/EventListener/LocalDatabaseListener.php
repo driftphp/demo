@@ -67,6 +67,6 @@ final class LocalDatabaseListener implements EventSubscriberInterface
     {
         return $this
             ->valueRepository
-            ->loadAll();
+            ->reloadDatabase();
     }
 }

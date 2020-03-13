@@ -1,12 +1,12 @@
 #!/bin/sh
 
 
-while ! nc -z demo_redis 6379;
+while ! nc -z demo_postgres 5432;
 do
-  echo "Waiting REDIS. Slepping";
+  echo "Waiting POSTGRES. Slepping";
   sleep 1;
 done;
-echo "Connected to REDIS!";
+echo "Connected to POSTGRES!";
 
 while ! nc -z demo_amqp 5672;
 do

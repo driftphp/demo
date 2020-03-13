@@ -1,7 +1,6 @@
 #
 # API
 #
-
 put:
   path: /values/{key}
   controller: App\Controller\PutValueController
@@ -22,11 +21,5 @@ get:
 #
 view_values:
   path: /
-  controller: App\Controller\ViewValuesController
-  methods: GET
-
-
-view_value:
-  path: /{key}
-  controller: App\Controller\ViewValueController
+  controller: App\Controller\IndexController
   methods: GET

@@ -1,0 +1,141 @@
+{% extends "header.twig" %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+{% endblock css %}
+
+
+{% block body %}
+    <div class="container" style="max-width: 1600px">
+        <div class="row">
+            <div class="col col-xl-6">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100 ver1 m-b-110">
+                            <div class="table100-head">
+                                <table>
+                                    <thead>
+                                        <tr class="row100 head">
+                                            <th class="cell100 column1">Key</th>
+                                            <th class="cell100 column2">Value</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody id="values">
+                                    {% for key, value in values %}
+                                        <tr class="row100 head" id="key-{{ key }}">
+                                            <td class="cell100 column1 key">{{ key }}</td>
+                                            <td class="cell100 column2 value">{{ value }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-xl-6">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100 ver1 m-b-110">
+                            <div class="table100-head">
+                                <table>
+                                    <thead>
+                                    <tr class="row100 head">
+                                        <th class="cell100 column1">Route</th>
+                                        <th class="cell100 column2">From</th>
+                                        <th class="cell100 column3">Value</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody id="events">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+    <script>
+        $('document').ready(function() {
+            $('.js-pscroll').each(function(){
+                var ps = new PerfectScrollbar(this);
+
+                $(window).on('resize', function(){
+                    ps.update();
+                })
+            });
+
+            const conn = new WebSocket('ws://0.0.0.0:{{ websocket_port }}/events');
+            const $events = $('#events');
+            const $values = $('#values');
+
+            conn.onopen = function(e) {
+
+            };
+
+            conn.onmessage = function(e) {
+                console.log(e.data);
+                let data = JSON.parse(e.data);
+                let type = data.type;
+
+                $events.append('\
+                    <tr class="row100 body">\
+                        <td class="cell100 column1">'+data.route+'</td>\
+                        <td class="cell100 column2">'+data.from+'</td>\
+                        <td class="cell100 column3">'+data.value+'</td>\
+                    </tr>\
+                ');
+
+                if (type == 'domain_event') {
+                    let event = data.event;
+                    let key = event.key;
+                    let row = $('#key-' +  key);
+                    let exists = row.length > 0;
+
+                    if(event.event == 'value_put') {
+                        let value = event.value;
+                        if (exists) {
+                            row.find('td.value').text(value);
+                        } else {
+                            $values.append('\
+                                <tr class="row100 body" id="key-' + key + '">\
+                                    <td class="cell100 column1 key">' + key + '</td>\
+                                    <td class="cell100 column2 value">' + value + '</td>\
+                                </tr>');
+                        }
+                    } else if (event.event == 'value_deleted') {
+                        row.remove();
+                    }
+                }
+            };
+        });
+    </script>
+    <script src="/public/js/main.js"></script>
+{% endblock js %}

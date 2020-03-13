@@ -7,11 +7,15 @@
     <meta name="author" content="DriftPHP Team">
     <meta name="description" content="This is part of the DriftPHP demo">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    {% block css %}
+    {% endblock css %}
 </head>
 
 <body>
-    {% block body %}
-    {% endblock body %}
+    {% block body %}{% endblock body %}
+    {% block js %}{% endblock js %}
 </body>
 
 </html>

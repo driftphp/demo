@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id="events">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    $('document').ready(function() {
+        const conn = new WebSocket('ws://0.0.0.0:1234/events');
+        const $events = $('#events');
+
+        conn.onopen = function(e) {
+            $events.append('<div>Connected</div>');
+        };
+
+        conn.onmessage = function(e) {
+            $events.append('<div>' + e.data + '</div>');
+        };
+    });
+
+    </script>
+</body>
+</html>

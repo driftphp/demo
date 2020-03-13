@@ -17,15 +17,14 @@ namespace App\Controller;
 
 use Domain\Query\GetValues;
 use Drift\CommandBus\Bus\QueryBus;
-use React\Promise\PromiseInterface;
+use Drift\Twig\Controller\RenderableController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 /**
- * Class ViewValuesController.
+ * Class IndexController.
  */
-class ViewValuesController
+class IndexController implements RenderableController
 {
     /**
      * @var QueryBus
@@ -33,17 +32,26 @@ class ViewValuesController
     private $queryBus;
 
     /**
+     * @var string
+     */
+    private $websocketPort;
+
+    /**
      * DeleteValueController constructor.
      *
      * @param QueryBus    $queryBus
      * @param Environment $twig
+     * @param string $websocketPort
      */
     public function __construct(
         QueryBus $queryBus,
-        Environment $twig
+        Environment $twig,
+        string $websocketPort
     ) {
         $this->queryBus = $queryBus;
         $this->twig = $twig;
+        $this->websocketPort = $websocketPort;
+        var_dump($this->websocketPort);
     }
 
     /**
@@ -51,23 +59,23 @@ class ViewValuesController
      *
      * @param Request $request
      *
-     * @return PromiseInterface
+     * @return array
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request) : array
     {
-        return $this
-            ->queryBus
-            ->ask(new GetValues())
-            ->then(function (array $values) {
-                $template = $this->twig->load('redis/view_values.twig');
-                $value = $template->render([
-                    'values' => $values,
-                ]);
+        return [
+            'websocket_port' => $this->websocketPort,
+            'values' => $this
+                ->queryBus
+                ->ask(new GetValues())
+        ];
+    }
 
-                return new Response(
-                    $value,
-                    200
-                );
-            });
+    /**
+     * @inheritDoc
+     */
+    public static function getTemplatePath(): string
+    {
+        return 'index.twig';
     }
 }

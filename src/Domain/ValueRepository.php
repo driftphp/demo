@@ -20,8 +20,14 @@ use React\Promise\PromiseInterface;
 /**
  * Class ValueRepository.
  */
-interface ValueRepository
+abstract class ValueRepository
 {
+
+    /**
+     * @var array
+     */
+    private $localValues = [];
+
     /**
      * Get value given a key.
      *
@@ -31,14 +37,41 @@ interface ValueRepository
      *
      * @throws KeyNotFoundException
      */
-    public function get(string $key): ?string;
+    public function get(string $key): string
+    {
+        if (!array_key_exists($key, $this->localValues)) {
+            throw new KeyNotFoundException(sprintf('Key % does not exist', $key));
+        }
+
+        return $this->localValues[$key];
+    }
 
     /**
      * Get all keys and values.
      *
      * @return array
      */
-    public function getAll(): array;
+    public function getAll(): array
+    {
+        return $this->localValues;
+    }
+
+    /**
+     * Reload all database
+     *
+     * @return PromiseInterface
+     */
+    public function reloadDatabase(): PromiseInterface
+    {
+        return $this
+            ->loadAll()
+            ->then(function($keyValues) {
+                $this->localValues = [];
+                foreach ($keyValues as $keyValue) {
+                    $this->localValues[$keyValue['key']] = $keyValue['value'];
+                }
+            });
+    }
 
     /**
      * Set value given a key and a value.
@@ -48,7 +81,7 @@ interface ValueRepository
      *
      * @return PromiseInterface
      */
-    public function set(
+    abstract public function set(
         string $key,
         string $value
     ): PromiseInterface;
@@ -60,12 +93,12 @@ interface ValueRepository
      *
      * @return PromiseInterface
      */
-    public function delete(string $key): PromiseInterface;
+    abstract public function delete(string $key): PromiseInterface;
 
     /**
      * Load locally.
      *
      * @return PromiseInterface
      */
-    public function loadAll(): PromiseInterface;
+    abstract public function loadAll(): PromiseInterface;
 }

@@ -49,7 +49,7 @@ class GetValueController
      *
      * @return PromiseInterface
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request) : PromiseInterface
     {
         $key = $request
             ->attributes
