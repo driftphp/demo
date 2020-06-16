@@ -35,27 +35,27 @@ services:
     networks: [main]
     container_name: server_1
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
-    env_file: .env
+    env_file: ../.env
 
   server_2:
     build: ..
     networks: [main]
     container_name: server_2
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
-    env_file: .env
+    env_file: ../.env
 
   server_3:
     build: ..
     networks: [main]
     container_name: server_3
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
-    env_file: .env
+    env_file: ../.env
 
   command_consumer:
     build: ..
     networks: [main]
     entrypoint: ["sh", "/wait-and-run.sh", "/command-consumer-entrypoint.sh"]
-    env_file: .env
+    env_file: ../.env
 
   websocket:
     build: ..
@@ -63,7 +63,7 @@ services:
     entrypoint: ["sh", "/wait-and-run.sh", "/websocket-entrypoint.sh"]
     ports:
       - "${WEBSOCKET_PORT}:8000"
-    env_file: .env
+    env_file: ../.env
 
 networks:
   main:
