@@ -11,5 +11,8 @@ RUN composer install -n --prefer-dist --no-dev --no-suggest && \
 
 COPY docker/* /
 
+# support windows
+RUN dos2unix /*.sh
+
 EXPOSE 8000
 CMD ["sh", "/server-entrypoint.sh"]
