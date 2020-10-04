@@ -1,0 +1,9 @@
+FROM postgres:alpine
+
+# this is used to support windows users.
+
+# adds startup schema loader script
+ADD ./docker-compose/postgres-init.sh /docker-entrypoint-initdb.d/postgres-init.sh
+
+# remove trailing \r character from the script
+RUN dos2unix /docker-entrypoint-initdb.d/postgres-init.sh

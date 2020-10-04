@@ -3,15 +3,15 @@ version: '3'
 services:
 
   postgres:
-    image: "postgres:alpine"
+    build:
+      context: ..
+      dockerfile: Dockerfile-postgres-extended
     container_name: demo_postgres
     networks: [main]
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: demo
-    volumes:
-      - ./postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
     ports:
       - "5432:5432"
 
