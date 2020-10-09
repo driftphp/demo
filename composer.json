@@ -31,7 +31,7 @@
         "drift/dbal-bundle": "0.1.*, >=0.1.2",
 
         "drift/amqp-bundle": "0.1.*",
-        "voryx/pgasync": "^2.0.4",
+        "react/mysql": "^0.5.4",
 
         "symfony/thanks":  "^1.2.5"
     },

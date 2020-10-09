@@ -24,22 +24,13 @@ dbal:
             dbname: "%env(DBAL_DATABASE)%"
 
 #
-# Command bus configuration
-#
-command_bus:
-    command_bus:
-        async_adapter:
-            adapter: amqp
-            amqp:
-                host: "%env(AMQP_HOST)%"
-                queue: "%env(AMQP_COMMANDS_QUEUE)%"
-
-#
 # Event bus configuration
 #
 event_bus:
     exchanges:
         events: "%env(AMQP_EVENTS_EXCHANGE)%"
+    router:
+        _all: events
     async_pass_through: false
     async_adapter:
         adapter: amqp
@@ -54,6 +45,8 @@ preload:
     services:
         "Domain\\ValueRepository": ~
         "App\\Controller\\ViewValuesController": ~
+        "amqp.event_bus_channel": ~
+        "amqp.command_bus_channel": ~
     presets:
         - "@symfony"
         - "@drift"

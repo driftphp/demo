@@ -52,7 +52,7 @@ class DBALValueRepository extends ValueRepository
         return $this
             ->connection
             ->upsert(self::TABLE, [
-                'key' => $key
+                'id' => $key
             ], [
                 'value' => $value
             ]);
@@ -66,7 +66,7 @@ class DBALValueRepository extends ValueRepository
         return $this
             ->connection
             ->delete(self::TABLE, [
-                'key' => $key
+                'id' => $key
             ]);
     }
 

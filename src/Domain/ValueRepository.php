@@ -22,7 +22,6 @@ use React\Promise\PromiseInterface;
  */
 abstract class ValueRepository
 {
-
     /**
      * @var array
      */
@@ -68,7 +67,7 @@ abstract class ValueRepository
             ->then(function($keyValues) {
                 $this->localValues = [];
                 foreach ($keyValues as $keyValue) {
-                    $this->localValues[$keyValue['key']] = $keyValue['value'];
+                    $this->localValues[$keyValue['id']] = $keyValue['value'];
                 }
             });
     }

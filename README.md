@@ -87,6 +87,11 @@ http://127.0.0.1:8000/
 > SERVER_PORT=8000  
 > WEBSOCKET_PORT=1234
 
+You might encounter some troubles. Since this docker-compose definition file
+works with some external images, some pieces could not work as expected due to
+some cache problems. Make sure that you run this demo from the scratch and not
+from cached containers and volumes.
+
 ## The architecture
 
 Please. Keep reading a bit more in order to understand how this application is
@@ -127,8 +132,6 @@ these containers, using the same networks and interacting among each other.
 - Server2 - Same than Server1
 - Server3 - Same than Server1
 
-- Command consumer - Consumes commands and dispatch domain events through the
-  configured EventBus.
 - Websocket - Exposes one websocket route in `/events` and dispatches all domain
   events in a documented format
   
