@@ -12,7 +12,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: demo
     volumes:
-      - ./mysql-init.sh:/docker-entrypoint-initdb.d/mysql-init.sh
+      - ./mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
     ports:
       - "3306:3306"
 
