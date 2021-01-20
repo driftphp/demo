@@ -18,9 +18,9 @@ namespace App\Controller;
 use Domain\Command\PutValue;
 use Drift\CommandBus\Bus\CommandBus;
 use React\Promise\PromiseInterface;
-use React\Promise\RejectedPromise;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use function React\Promise\reject;
 
 /**
  * Class PutValueController.
@@ -58,7 +58,7 @@ class PutValueController
         $value = $request->getContent(false);
 
         if (empty($value)) {
-            return new RejectedPromise(new \Exception(
+            return reject(new \Exception(
                 'Value should have a non empty value'
             ));
         }

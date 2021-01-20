@@ -20,6 +20,14 @@ This demo uses these DriftPHP packages
 - Twig Adapter
 - DBAL
 
+> This demo supports PHP8. We only made 2 changes to make this happen. First of
+> all, new DriftPHP projects that want to change to PHP8 should start using the
+> php8 Docker image - driftphp/base-php8 -. After that, and because some
+> dependencies don't have their updates to accept the new PHP version, you
+> should install/update your composer dependencies with the flag
+> `--ignore-platform-reqs`. With these 2 changes, we want to welcome PHP8 with a
+> big smile on our faces :)
+
 ## Help US :heart:
 
 Did you enjoy this demo? Do you think that this DriftPHP Framework deserves an
@@ -76,15 +84,15 @@ You can start using this demo by using `docker-compose`. As easy as it sounds.
 ```
 
 Once the whole environment is up and running, you'll be able to request the
-server by accessing the port `8000` through your browser.
+server by accessing the port `8999` through your browser.
 
 ```bash
-http://127.0.0.1:8000/
+http://127.0.0.1:8999/
 ```
 
 > You can change the forwarded port by changing the values from the .env file  
 >
-> SERVER_PORT=8000  
+> SERVER_PORT=8999
 > WEBSOCKET_PORT=1234
 
 You might encounter some troubles. Since this docker-compose definition file
@@ -125,7 +133,7 @@ these containers, using the same networks and interacting among each other.
 - RabbitMQ as a queues and exchanges system
 - PostgreSQL as a persistence layer used as a driver in our DBAL configuration
 
-- Tiny balancer, listening at port 8000 and balancing among next servers
+- Tiny balancer, listening at port 8999 and balancing among next servers
 - Server1 - DriftPHP server serving HTTP requests and subscribed to a temporary.
   Configured to Enqueue commands asynchronously
   exchange for domain events
@@ -142,7 +150,7 @@ So let's take a look at each action
 You can put a value using the exposed api REST.
 
 ```bash
-curl -i -XPUT -H 'Content-Type: application/json' localhost:8000/values/mykey -d'myvalue'
+curl -i -XPUT -H 'Content-Type: application/json' localhost:8999/values/mykey -d'myvalue'
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -155,7 +163,7 @@ Connection: close
 {"key":"mykey","value":"myvalue","message":"OK"}
 ```
 
-As you can see, you're using the port `8000`, what means that the balancer will
+As you can see, you're using the port `8999`, what means that the balancer will
 forward your request to one of the existing servers. This server will handle the
 request and will execute a new Command through the command bus. Because the
 command bus is configured to work asynchronously, instead of handling the
@@ -182,7 +190,7 @@ event, updating the local and displayed lists.
 In that case, we want to delete one of our values.
 
 ```bash
-curl -i -XDELETE localhost:8000/values/mykey
+curl -i -XDELETE localhost:8999/values/mykey
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -204,7 +212,7 @@ We can use the api REST to request one key's value. If the key exists then we
 will have the value.
 
 ```bash
-curl -i -XGET localhost:8000/values/mykey
+curl -i -XGET localhost:8999/values/mykey
 
 HTTP/1.1 200 OK
 cache-control: no-cache, private
@@ -220,7 +228,7 @@ Connection: close
 Otherwise, we will have a 404.
 
 ```bash
-curl -i -XGET localhost:8000/values/nonexistingkey
+curl -i -XGET localhost:8999/values/nonexistingkey
 
 HTTP/1.1 404 Not Found
 cache-control: no-cache, private
@@ -243,9 +251,9 @@ that yes, these values are properly updated!
 Just check if the key is in the local array and return the value.
 That's it. Without any persistence layer access, without having bottlenecks.
 
-### Visit 127.0.0.1:8000/
+### Visit 127.0.0.1:8999/
 
-You can open your browser to `http://127.0.0.1:8000` and you will be see 2
+You can open your browser to `http://127.0.0.1:8999` and you will be see 2
 lists. The first one will be the current state of the website. These values are
 not taken from the persistence layer, but from one fresh copy allocated in one
 of our servers memory.

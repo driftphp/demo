@@ -2,10 +2,10 @@ version: '3'
 
 services:
 
-  mysql:
+  driftphp_demo_mysql:
     image: "mysql:8"
-    container_name: demo_mysql
-    networks: [main]
+    container_name: driftphp_demo_mysql
+    networks: [driftphp_demo_main]
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_USER: root
@@ -14,51 +14,53 @@ services:
     volumes:
       - ./mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
     ports:
-      - "3306:3306"
+      - "3306"
 
-  amqp:
+  driftphp_demo_amqp:
     image: "rabbitmq:3-management"
-    container_name: demo_amqp
-    networks: [main]
+    container_name: driftphp_demo_amqp
+    networks: [driftphp_demo_main]
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5672"
+      - "15672"
 
-  tiny_balancer:
+  driftphp_demo_tiny_balancer:
     image: "driftphp/tiny-balancer"
+    container_name: driftphp_tiny_balancer
     ports:
       - "${SERVER_PORT}:8000"
-    networks: [main]
-    entrypoint: ["php", "balancer", "8000", "server_1:8000", "server_2:8000", "server_3:8000"]
+    networks: [driftphp_demo_main]
+    entrypoint: ["php", "balancer", "8000", "driftphp_server_1:8000", "driftphp_server_2:8000", "driftphp_server_3:8000"]
 
-  server_1:
+  driftphp_demo_server_1:
     build: ..
-    networks: [main]
-    container_name: server_1
+    networks: [driftphp_demo_main]
+    container_name: driftphp_server_1
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: ../.env
 
-  server_2:
+  driftphp_demo_server_2:
     build: ..
-    networks: [main]
-    container_name: server_2
+    networks: [driftphp_demo_main]
+    container_name: driftphp_server_2
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: ../.env
 
-  server_3:
+  driftphp_demo_server_3:
     build: ..
-    networks: [main]
-    container_name: server_3
+    networks: [driftphp_demo_main]
+    container_name: driftphp_server_3
     entrypoint: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     env_file: ../.env
 
-  websocket:
+  driftphp_demo_websocket:
     build: ..
-    networks: [main]
+    networks: [driftphp_demo_main]
+    container_name: driftphp_tiny_websocket
     entrypoint: ["sh", "/wait-and-run.sh", "/websocket-entrypoint.sh"]
     ports:
       - "${WEBSOCKET_PORT}:8000"
     env_file: ../.env
 
 networks:
-  main:
+  driftphp_demo_main:
