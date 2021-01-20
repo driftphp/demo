@@ -2,7 +2,7 @@
 
 This is a simple Demo about how to use properly DriftPHP. Please, read carefully
 our [Documentation](https://driftphp.io) in order to understand the rationale
-behind each functionality.
+behind each functionality. Built on top of **PHP8**.
 
 <p align="center">
   <img src="public/driftphp.png">
