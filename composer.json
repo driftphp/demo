@@ -30,6 +30,7 @@
         "drift/twig-bundle": "^0.1.0",
         "drift/dbal-bundle": "^0.1.2",
 
+        "seregazhuk/php-watcher": "^0.5.2",
         "drift/amqp-bundle": "^0.1.0",
         "react/mysql": "^0.5.4",
 
