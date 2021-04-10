@@ -3,7 +3,7 @@ FROM driftphp/base-php8
 WORKDIR /var/www
 
 #
-# Apisearch installation
+# Drift demo installation
 #
 COPY . .
 RUN composer install -n --prefer-dist --no-dev --ignore-platform-reqs && \

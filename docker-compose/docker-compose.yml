@@ -8,7 +8,6 @@ services:
     networks: [driftphp_demo_main]
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: demo
     volumes:
@@ -31,6 +30,7 @@ services:
       - "${SERVER_PORT}:8000"
     networks: [driftphp_demo_main]
     entrypoint: ["php", "balancer", "8000", "driftphp_server_1:8000", "driftphp_server_2:8000", "driftphp_server_3:8000"]
+    env_file: ../.env
 
   driftphp_demo_server_1:
     build: ..
