@@ -26,10 +26,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class BroadcastEvent implements EventSubscriberInterface
 {
-    /**
-     * @var Connections
-     */
-    private $connections;
+    private Connections $connections;
 
     /**
      * NotifyEvent constructor.

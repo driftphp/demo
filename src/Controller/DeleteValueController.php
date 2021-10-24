@@ -26,10 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class DeleteValueController
 {
-    /**
-     * @var CommandBus
-     */
-    private $commandBus;
+    private CommandBus $commandBus;
 
     /**
      * DeleteValueController constructor.

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw==" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="/public/css/util.css">
     <link rel="stylesheet" type="text/css" href="/public/css/main.css">
 {% endblock css %}
@@ -82,6 +83,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous"></script>
     <script>
         $('document').ready(function() {
             $('.js-pscroll').each(function(){
@@ -102,7 +104,19 @@
 
             conn.onmessage = function(e) {
                 console.log(e.data);
-                let data = JSON.parse(e.data);
+                let data = '';
+                try {
+                    data = JSON.parse(e.data);
+                } catch (error) {
+                    new Noty({
+                        type: 'success',
+                        text: 'New message: ' + e.data,
+                        theme: 'metroui',
+                        timeout: 2000,
+                    }).show();
+                    return;
+                }
+
                 let type = data.type;
 
                 $events.append('\

@@ -20,15 +20,8 @@ namespace Domain\Event;
  */
 final class ValueHasBeenPut
 {
-    /**
-     * @var string
-     */
-    private $key;
-
-    /**
-     * @var string
-     */
-    private $value;
+    private string $key;
+    private string $value;
 
     /**
      * ValueHasBeenPut constructor.

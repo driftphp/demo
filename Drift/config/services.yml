@@ -57,6 +57,8 @@ websocket:
     routes:
         events:
             path: /events
+twig:
+    views_path: "%kernel.project_dir%/views/"
 
 services:
     # default configuration for services in *this* file

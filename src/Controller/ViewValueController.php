@@ -25,10 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ViewValueController implements RenderableController
 {
-    /**
-     * @var QueryBus
-     */
-    private $queryBus;
+    private QueryBus $queryBus;
 
     /**
      * DeleteValueController constructor.

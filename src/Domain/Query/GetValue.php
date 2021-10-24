@@ -20,10 +20,7 @@ namespace Domain\Query;
  */
 final class GetValue
 {
-    /**
-     * @var string
-     */
-    private $key;
+    private string $key;
 
     /**
      * GetValue constructor.

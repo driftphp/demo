@@ -26,15 +26,8 @@ use React\Promise\PromiseInterface;
  */
 final class DeleteValueHandler
 {
-    /**
-     * @var ValueRepository
-     */
-    private $valueRepository;
-
-    /**
-     * @var EventBus
-     */
-    private $eventBus;
+    private ValueRepository $valueRepository;
+    private EventBus $eventBus;
 
     /**
      * DeleteValueHandler constructor.

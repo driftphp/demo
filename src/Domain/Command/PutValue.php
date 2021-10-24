@@ -20,15 +20,8 @@ namespace Domain\Command;
  */
 final class PutValue
 {
-    /**
-     * @var string
-     */
-    private $key;
-
-    /**
-     * @var string
-     */
-    private $value;
+    private string $key;
+    private string $value;
 
     /**
      * PutValue constructor.

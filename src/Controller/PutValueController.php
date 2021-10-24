@@ -27,10 +27,7 @@ use function React\Promise\reject;
  */
 class PutValueController
 {
-    /**
-     * @var CommandBus
-     */
-    private $commandBus;
+    private CommandBus $commandBus;
 
     /**
      * DeleteValueController constructor.

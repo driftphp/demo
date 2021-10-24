@@ -28,11 +28,7 @@ class DBALValueRepository extends ValueRepository
      * @var string
      */
     const TABLE = 'key_value';
-
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     /**
      * DBALValueRepository constructor.

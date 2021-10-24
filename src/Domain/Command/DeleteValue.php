@@ -20,10 +20,7 @@ namespace Domain\Command;
  */
 final class DeleteValue
 {
-    /**
-     * @var string
-     */
-    private $key;
+    private string $key;
 
     /**
      * GetValue constructor.

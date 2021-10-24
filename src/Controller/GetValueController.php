@@ -27,10 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GetValueController
 {
-    /**
-     * @var QueryBus
-     */
-    private $queryBus;
+    private QueryBus $queryBus;
 
     /**
      * DeleteValueController constructor.

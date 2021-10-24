@@ -15,17 +15,16 @@ declare(strict_types=1);
 
 namespace Domain;
 
+use Drift\HttpKernel\AsyncKernelEvents;
 use React\Promise\PromiseInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ValueRepository.
  */
-abstract class ValueRepository
+abstract class ValueRepository implements EventSubscriberInterface
 {
-    /**
-     * @var array
-     */
-    private $localValues = [];
+    private array $localValues = [];
 
     /**
      * Get value given a key.
@@ -100,4 +99,15 @@ abstract class ValueRepository
      * @return PromiseInterface
      */
     abstract public function loadAll(): PromiseInterface;
+
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            AsyncKernelEvents::PRELOAD => 'reloadDatabase'
+        ];
+    }
+
 }

@@ -27,10 +27,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class LocalDatabaseListener implements EventSubscriberInterface
 {
-    /**
-     * @var ValueRepository
-     */
-    private $valueRepository;
+    private ValueRepository $valueRepository;
 
     /**
      * LocalDatabaseListener constructor.

@@ -24,12 +24,7 @@ use Domain\ValueRepository;
  */
 final class GetValueHandler
 {
-    /**
-     * @var ValueRepository
-     *
-     * Value Repository
-     */
-    private $valueRepository;
+    private ValueRepository $valueRepository;
 
     /**
      * PutValueController constructor.

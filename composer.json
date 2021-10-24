@@ -10,7 +10,7 @@
     ],
 
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^7.4 || ^8.0",
 
         "symfony/console": "^5.0.0",
         "symfony/framework-bundle": "^5.0.0",
@@ -30,7 +30,6 @@
         "drift/twig-bundle": "^0.1.0",
         "drift/dbal-bundle": "^0.1.2",
 
-        "seregazhuk/php-watcher": "^0.5.2",
         "drift/amqp-bundle": "^0.1.0",
         "react/mysql": "^0.5.4",
 

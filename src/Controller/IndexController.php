@@ -19,39 +19,27 @@ use Domain\Query\GetValues;
 use Drift\CommandBus\Bus\QueryBus;
 use Drift\Twig\Controller\RenderableController;
 use Symfony\Component\HttpFoundation\Request;
-use Twig\Environment;
 
 /**
  * Class IndexController.
  */
 class IndexController implements RenderableController
 {
-    /**
-     * @var QueryBus
-     */
-    private $queryBus;
-
-    /**
-     * @var string
-     */
-    private $websocketPort;
+    private QueryBus $queryBus;
+    private string $websocketPort;
 
     /**
      * DeleteValueController constructor.
      *
      * @param QueryBus    $queryBus
-     * @param Environment $twig
      * @param string $websocketPort
      */
     public function __construct(
         QueryBus $queryBus,
-        Environment $twig,
         string $websocketPort
     ) {
         $this->queryBus = $queryBus;
-        $this->twig = $twig;
         $this->websocketPort = $websocketPort;
-        var_dump($this->websocketPort);
     }
 
     /**

@@ -20,10 +20,7 @@ namespace Domain\Event;
  */
 final class ValueHasBeenDeleted
 {
-    /**
-     * @var string
-     */
-    private $key;
+    private string $key;
 
     /**
      * ValueHasBeenDeleted constructor.
